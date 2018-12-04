@@ -14,7 +14,7 @@
                 width: 25px;
                 height: 25px;
                 border-radius: 50%;
-                margin-left: 5px;
+                margin-left: 10px;
             }
         }
         .center{
@@ -151,7 +151,7 @@
     <div>
         <div class="mobile_top">
             <div class="left" >
-                <i  style="font-size: 15px;color: #D8D8D8;" class="icon iconfont icon-last-"></i>
+                <i  style="font-size: 15px;color: #D8D8D8;" @click="reback_last()" class="icon iconfont icon-last-"></i>
                 <img class="imgs" @click="show_us()" src="https://i.loli.net/2017/08/21/599a521472424.jpg" alt="">
             </div>
             <div class="center">
@@ -165,7 +165,7 @@
                     </div>
                 </div>
             </div>
-            <div class="right">
+            <div class="right" @click="log_out()">
                 <i style="font-size: 17px;color: #D8D8D8" class="icon iconfont icon-logout-"></i>
             </div>
         </div>
@@ -261,6 +261,12 @@
             },
             cancel(){
                 this.show_if_user_msg=false;
+            },
+            reback_last(){
+                this.$router.go(-1);
+            },
+            log_out(){
+                this.$router.push({ name: 'login'})
             }
         }
     }

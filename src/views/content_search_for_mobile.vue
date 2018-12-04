@@ -91,7 +91,7 @@
                     </div>
                 </div>
 
-                <div class="rebak_to_search">返回</div>
+                <div class="rebak_to_search" @click="reback()">返回</div>
 
             </div>
         </div>
@@ -154,7 +154,9 @@
 
         },
         methods:{
-
+            reback(){
+                this.$router.push({ name: 'search'})
+            }
         }
     }
 </script>

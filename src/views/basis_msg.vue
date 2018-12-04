@@ -225,7 +225,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="tops_title_two">
+                <div class="tops_title_two" @click="log_out()">
                     <i style="font-size: 20px;" class="icon iconfont icon-logout-"></i>
                     &nbsp;
                     <span>退出当前患者档案</span>
@@ -265,8 +265,8 @@
             })
         },
         methods:{
-            exit(){
-
+            log_out(){
+                this.$router.push({ name: 'login'})
             }
         }
     }

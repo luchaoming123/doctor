@@ -542,7 +542,7 @@
                 </div>
             </Modal>
             <!--excel导出-->
-            <Table hidden size="small" :columns="columns1" :data="data1" ref="table"></Table>
+            <Table hidden id="print_datas" size="small" :columns="columns1" :data="data1" ref="table"></Table>
         </div>
         <div class="mobile_phone content_search_for_mobile only_search_for_mobile">
             <basis_msg_mobile title_value="请选择送检时间范围"></basis_msg_mobile>
@@ -571,12 +571,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="item in table_list">
+                    <tr v-for="(item,index) in table_list">
                         <td>{{item.num}}</td>
                         <td>{{item.check_time}}</td>
                         <td>{{item.come_time}}</td>
                         <td>{{item.doctor}}</td>
-                        <td style="padding-right: 5px"><i style="font-size: 15px;color: rgb(204,204,204);position: relative;top: 1px" class="icon iconfont icon-baogao-"></i></td>
+                        <td @click="route_mobile_to_alert(index)" style="padding-right: 5px"><i style="font-size: 15px;color: rgb(204,204,204);position: relative;top: 1px" class="icon iconfont icon-baogao-"></i></td>
                     </tr>
                 </tbody>
             </table>
@@ -833,7 +833,33 @@
             },
             /*打印*/
             print(){
-                window.print()
+                // 打开一个新窗口
+                const myWindow = window.open('', '标题');
+
+                // 获取id为app内的html
+                const $print_datas=$("#print_datas");
+                $print_datas.find('table').css({'width':'100%'});
+                const bodyHtml = $print_datas.html();
+
+                // 获取head标签内的html
+                let headHtml = document.head.innerHTML;
+
+                // 头中的screen换成打印样式print
+                headHtml = headHtml.replace('screen', 'screen, print');
+
+                //重新写入文档流
+                myWindow.document.write('<html>');
+                myWindow.document.write(headHtml);
+                myWindow.document.write('<body');
+                myWindow.document.write(bodyHtml);
+                myWindow.document.write('<script>setTimeout(function() {window.print();window.close()}, 500)</');
+                myWindow.document.write('script>');
+                myWindow.document.write('</body></html>');
+
+            },
+            /*移动端alert路由*/
+            route_mobile_to_alert(index){
+                this.$router.push({ name: 'search_mobile', params: { data: index }})
             },
         }
     }

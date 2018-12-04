@@ -79,12 +79,34 @@
                             <div class="pad_10" id="main_two" style="height: 400px;"></div>
                             </Col>
                             <Col span="8" class="view_chart">
+                            <div class="pad_10" id="main_three" style="height: 400px;"></div>
+                            </Col>
+                            <Col span="8" class="view_chart">
                             <div class="pad_10" id="main_four" style="height: 400px;"></div>
+                            </Col>
+                            <Col span="8" class="view_chart">
+                            <div class="pad_10" id="main_five" style="height: 400px;"></div>
+                            </Col>
+                            <Col span="8" class="view_chart">
+                            <div class="pad_10" id="main_six" style="height: 400px;"></div>
                             </Col>
                         </Row>
                         <Row>
                             <Col span="8" class="view_chart">
-                            <div class="pad_10" id="main_three" style="height: 400px;"></div>
+                                <div class="pad_10" id="main_7" style="height: 400px;"></div>
+                            </Col>
+                            <Col span="16" class="view_chart">
+                            <div class="pad_10" id="main_8" style="height: 400px;"></div>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col span="24" class="view_chart">
+                            <div class="pad_10" id="main_9" style="height: 400px;"></div>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col span="24" class="view_chart">
+                            <div class="pad_10" id="main_10" style="height: 400px;"></div>
                             </Col>
                         </Row>
                     </div>
@@ -178,95 +200,154 @@
             myChart_four.setOption(this.echart_four());
             main_mobile_four.setOption(this.echart_four());
 
+            /**
+             * 表五
+             * */
+                // 基于准备好的dom，初始化echarts实例
+            var myChart_five = echarts.init(document.getElementById('main_five'));
+
+            // 绘制图表
+            myChart_five.setOption(this.echart_five());
+
+            /**
+             * 表六
+             * */
+                // 基于准备好的dom，初始化echarts实例
+            var myChart_six = echarts.init(document.getElementById('main_six'));
+
+            // 绘制图表
+            myChart_six.setOption(this.echart_six());
+
+            /**
+             * 表7
+             * */
+                // 基于准备好的dom，初始化echarts实例
+            var myChart_7 = echarts.init(document.getElementById('main_7'));
+
+            // 绘制图表
+            myChart_7.setOption(this.echart_7());
+
+            /**
+             * 表8
+             * */
+                // 基于准备好的dom，初始化echarts实例
+            var myChart_8 = echarts.init(document.getElementById('main_8'));
+
+            // 绘制图表
+            myChart_8.setOption(this.echart_8());
+
+            /**
+             * 表9
+             * */
+                // 基于准备好的dom，初始化echarts实例
+            var myChart_9 = echarts.init(document.getElementById('main_9'));
+
+            // 绘制图表
+            myChart_9.setOption(this.echart_9());
+
+            /**
+             * 表10
+             * */
+                // 基于准备好的dom，初始化echarts实例
+            var myChart_10 = echarts.init(document.getElementById('main_10'));
+
+            // 绘制图表
+            myChart_10.setOption(this.echart_10());
+
         },
         methods:{
             exit(){
 
             },
             echart_one(){
-                var base = +new Date(1968, 9, 3);
-                var oneDay = 24 * 3600 * 1000;
-                var date = [];
-
-                var data = [Math.random() * 300];
-
-                for (var i = 1; i < 20000; i++) {
-                    var now = new Date(base += oneDay);
-                    date.push([now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/'));
-                    data.push(Math.round((Math.random() - 0.5) * 20 + data[i - 1]));
-                }
-
-                var date=date;
 
                 var option = {
-                    tooltip: {
+                    tooltip : {
                         trigger: 'axis',
-                        position: function (pt) {
-                            return [pt[0], '10%'];
+                        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+                            type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
                         }
                     },
-                    title: {
-                        left: 'center',
-                        text: '大数据量面积图',
+                    legend: {
+                        data: ['直接访问', '邮件营销','联盟广告','视频广告','搜索引擎']
                     },
-                    toolbox: {
-                        feature: {
-                            dataZoom: {
-                                yAxisIndex: 'none'
-                            },
-                            restore: {},
-                            saveAsImage: {}
-                        }
+                    grid: {
+                        left: '3%',
+                        right: '4%',
+                        bottom: '3%',
+                        containLabel: true
                     },
-                    xAxis: {
-                        type: 'category',
-                        boundaryGap: false,
-                        data: date
+                    xAxis:  {
+                        type: 'value'
                     },
                     yAxis: {
-                        type: 'value',
-                        boundaryGap: [0, '100%']
+                        type: 'category',
+                        data: ['周一','周二','周三','周四','周五','周六','周日']
                     },
-                    dataZoom: [{
-                        type: 'inside',
-                        start: 0,
-                        end: 10
-                    }, {
-                        start: 0,
-                        end: 10,
-                        handleIcon: 'M10.7,11.9v-1.3H9.3v1.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4v1.3h1.3v-1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7V23h6.6V24.4z M13.3,19.6H6.7v-1.4h6.6V19.6z',
-                        handleSize: '80%',
-                        handleStyle: {
-                            color: '#fff',
-                            shadowBlur: 3,
-                            shadowColor: 'rgba(0, 0, 0, 0.6)',
-                            shadowOffsetX: 2,
-                            shadowOffsetY: 2
-                        }
-                    }],
                     series: [
                         {
-                            name:'模拟数据',
-                            type:'line',
-                            smooth:true,
-                            symbol: 'none',
-                            sampling: 'average',
-                            itemStyle: {
-                                color: 'rgb(255, 70, 131)'
+                            name: '直接访问',
+                            type: 'bar',
+                            stack: '总量',
+                            label: {
+                                normal: {
+                                    show: true,
+                                    position: 'insideRight'
+                                }
                             },
-                            areaStyle: {
-                                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                                    offset: 0,
-                                    color: 'rgb(255, 158, 68)'
-                                }, {
-                                    offset: 1,
-                                    color: 'rgb(255, 70, 131)'
-                                }])
+                            data: [320, 302, 301, 334, 390, 330, 320]
+                        },
+                        {
+                            name: '邮件营销',
+                            type: 'bar',
+                            stack: '总量',
+                            label: {
+                                normal: {
+                                    show: true,
+                                    position: 'insideRight'
+                                }
                             },
-                            data: data
+                            data: [120, 132, 101, 134, 90, 230, 210]
+                        },
+                        {
+                            name: '联盟广告',
+                            type: 'bar',
+                            stack: '总量',
+                            label: {
+                                normal: {
+                                    show: true,
+                                    position: 'insideRight'
+                                }
+                            },
+                            data: [220, 182, 191, 234, 290, 330, 310]
+                        },
+                        {
+                            name: '视频广告',
+                            type: 'bar',
+                            stack: '总量',
+                            label: {
+                                normal: {
+                                    show: true,
+                                    position: 'insideRight'
+                                }
+                            },
+                            data: [150, 212, 201, 154, 190, 330, 410]
+                        },
+                        {
+                            name: '搜索引擎',
+                            type: 'bar',
+                            stack: '总量',
+                            label: {
+                                normal: {
+                                    show: true,
+                                    position: 'insideRight'
+                                }
+                            },
+                            data: [820, 832, 901, 934, 1290, 1330, 1320]
                         }
                     ]
                 };
+
 
                 return option;
 
@@ -317,98 +398,6 @@
                 return option;
             },
             echart_three(){
-
-                var colors = ['#5793f3', '#d14a61', '#675bba'];
-
-
-                var option = {
-                    color: colors,
-
-                    title: {
-                        left: 'left',
-                        text: '多 X 轴示例',
-                    },
-                    tooltip: {
-                        trigger: 'none',
-                        axisPointer: {
-                            type: 'cross'
-                        }
-                    },
-                    legend: {
-                        data:['2015 降水量', '2016 降水量']
-                    },
-                    grid: {
-                        top: 70,
-                        bottom: 50
-                    },
-                    xAxis: [
-                        {
-                            type: 'category',
-                            axisTick: {
-                                alignWithLabel: true
-                            },
-                            axisLine: {
-                                onZero: false,
-                                lineStyle: {
-                                    color: colors[1]
-                                }
-                            },
-                            axisPointer: {
-                                label: {
-                                    formatter: function (params) {
-                                        return '降水量  ' + params.value
-                                            + (params.seriesData.length ? '：' + params.seriesData[0].data : '');
-                                    }
-                                }
-                            },
-                            data: ["2016-1", "2016-2", "2016-3", "2016-4", "2016-5", "2016-6", "2016-7", "2016-8", "2016-9", "2016-10", "2016-11", "2016-12"]
-                        },
-                        {
-                            type: 'category',
-                            axisTick: {
-                                alignWithLabel: true
-                            },
-                            axisLine: {
-                                onZero: false,
-                                lineStyle: {
-                                    color: colors[0]
-                                }
-                            },
-                            axisPointer: {
-                                label: {
-                                    formatter: function (params) {
-                                        return '降水量  ' + params.value
-                                            + (params.seriesData.length ? '：' + params.seriesData[0].data : '');
-                                    }
-                                }
-                            },
-                            data: ["2015-1", "2015-2", "2015-3", "2015-4", "2015-5", "2015-6", "2015-7", "2015-8", "2015-9", "2015-10", "2015-11", "2015-12"]
-                        }
-                    ],
-                    yAxis: [
-                        {
-                            type: 'value'
-                        }
-                    ],
-                    series: [
-                        {
-                            name:'2015 降水量',
-                            type:'line',
-                            xAxisIndex: 1,
-                            smooth: true,
-                            data: [2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3]
-                        },
-                        {
-                            name:'2016 降水量',
-                            type:'line',
-                            smooth: true,
-                            data: [3.9, 5.9, 11.1, 18.7, 48.3, 69.2, 231.6, 46.6, 55.4, 18.4, 10.3, 0.7]
-                        }
-                    ]
-                };
-                return option;
-            },
-            echart_four(){
                 var option = {
                     xAxis: {
                         type: 'category',
@@ -419,25 +408,454 @@
                     },
                     series: [{
                         data: [120, 200, 150, 80, 70, 110, 130],
-                        type: 'line',
-                        symbol: 'triangle',
-                        symbolSize: 20,
-                        lineStyle: {
-                            normal: {
-                                color: 'green',
-                                width: 4,
-                                type: 'dashed'
-                            }
-                        },
-                        itemStyle: {
-                            normal: {
-                                borderWidth: 3,
-                                borderColor: 'yellow',
-                                color: 'blue'
-                            }
-                        }
+                        type: 'bar'
                     }]
                 };
+
+
+                return option;
+            },
+            echart_four(){
+                var option = {
+                    tooltip: {
+                        trigger: 'item',
+                        formatter: "{a} <br/>{b}: {c} ({d}%)"
+                    },
+                    legend: {
+                        orient: 'vertical',
+                        x: 'left',
+                        data:['直接访问','邮件营销','联盟广告','视频广告','搜索引擎']
+                    },
+                    series: [
+                        {
+                            name:'访问来源',
+                            type:'pie',
+                            radius: ['50%', '70%'],
+                            avoidLabelOverlap: false,
+                            label: {
+                                normal: {
+                                    show: false,
+                                    position: 'center'
+                                },
+                                emphasis: {
+                                    show: true,
+                                    textStyle: {
+                                        fontSize: '30',
+                                        fontWeight: 'bold'
+                                    }
+                                }
+                            },
+                            labelLine: {
+                                normal: {
+                                    show: false
+                                }
+                            },
+                            data:[
+                                {value:335, name:'直接访问'},
+                                {value:310, name:'邮件营销'},
+                                {value:234, name:'联盟广告'},
+                                {value:135, name:'视频广告'},
+                                {value:1548, name:'搜索引擎'}
+                            ]
+                        }
+                    ]
+                };
+
+                return option;
+            },
+
+            echart_five(){
+                var option = {
+                    backgroundColor: '#2c343c',
+
+                    title: {
+                        text: 'Customized Pie',
+                        left: 'center',
+                        top: 20,
+                        textStyle: {
+                            color: '#ccc'
+                        }
+                    },
+
+                    tooltip : {
+                        trigger: 'item',
+                        formatter: "{a} <br/>{b} : {c} ({d}%)"
+                    },
+
+                    visualMap: {
+                        show: false,
+                        min: 80,
+                        max: 600,
+                        inRange: {
+                            colorLightness: [0, 1]
+                        }
+                    },
+                    series : [
+                        {
+                            name:'访问来源',
+                            type:'pie',
+                            radius : '55%',
+                            center: ['50%', '50%'],
+                            data:[
+                                {value:335, name:'直接访问'},
+                                {value:310, name:'邮件营销'},
+                                {value:274, name:'联盟广告'},
+                                {value:235, name:'视频广告'},
+                                {value:400, name:'搜索引擎'}
+                            ].sort(function (a, b) { return a.value - b.value; }),
+                            roseType: 'radius',
+                            label: {
+                                normal: {
+                                    textStyle: {
+                                        color: 'rgba(255, 255, 255, 0.3)'
+                                    }
+                                }
+                            },
+                            labelLine: {
+                                normal: {
+                                    lineStyle: {
+                                        color: 'rgba(255, 255, 255, 0.3)'
+                                    },
+                                    smooth: 0.2,
+                                    length: 10,
+                                    length2: 20
+                                }
+                            },
+                            itemStyle: {
+                                normal: {
+                                    color: '#c23531',
+                                    shadowBlur: 200,
+                                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                                }
+                            },
+
+                            animationType: 'scale',
+                            animationEasing: 'elasticOut',
+                            animationDelay: function (idx) {
+                                return Math.random() * 200;
+                            }
+                        }
+                    ]
+                };
+
+                return option;
+            },
+
+            echart_six(){
+                var
+                    option = {
+                        color: ['#3398DB'],
+                        tooltip : {
+                            trigger: 'axis',
+                            axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+                                type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                            }
+                        },
+                        grid: {
+                            left: '3%',
+                            right: '4%',
+                            bottom: '3%',
+                            containLabel: true
+                        },
+                        xAxis : [
+                            {
+                                type : 'category',
+                                data : ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                                axisTick: {
+                                    alignWithLabel: true
+                                }
+                            }
+                        ],
+                        yAxis : [
+                            {
+                                type : 'value'
+                            }
+                        ],
+                        series : [
+                            {
+                                name:'直接访问',
+                                type:'bar',
+                                barWidth: '60%',
+                                data:[10, 52, 200, 334, 390, 330, 220]
+                            }
+                        ]
+                    };
+
+
+                return option;
+            },
+            echart_7(){
+                var option = {
+                    tooltip : {
+                        trigger: 'axis',
+                        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+                            type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                        }
+                    },
+                    legend: {
+                        data:['直接访问','邮件营销','联盟广告','视频广告','搜索引擎','百度','谷歌','必应','其他']
+                    },
+                    grid: {
+                        left: '3%',
+                        right: '4%',
+                        bottom: '3%',
+                        containLabel: true
+                    },
+                    xAxis : [
+                        {
+                            type : 'category',
+                            data : ['周一','周二','周三','周四','周五','周六','周日']
+                        }
+                    ],
+                    yAxis : [
+                        {
+                            type : 'value'
+                        }
+                    ],
+                    series : [
+                        {
+                            name:'直接访问',
+                            type:'bar',
+                            data:[320, 332, 301, 334, 390, 330, 320]
+                        },
+                        {
+                            name:'邮件营销',
+                            type:'bar',
+                            stack: '广告',
+                            data:[120, 132, 101, 134, 90, 230, 210]
+                        },
+                        {
+                            name:'联盟广告',
+                            type:'bar',
+                            stack: '广告',
+                            data:[220, 182, 191, 234, 290, 330, 310]
+                        },
+                        {
+                            name:'视频广告',
+                            type:'bar',
+                            stack: '广告',
+                            data:[150, 232, 201, 154, 190, 330, 410]
+                        },
+                        {
+                            name:'搜索引擎',
+                            type:'bar',
+                            data:[862, 1018, 964, 1026, 1679, 1600, 1570],
+                            markLine : {
+                                lineStyle: {
+                                    normal: {
+                                        type: 'dashed'
+                                    }
+                                },
+                                data : [
+                                    [{type : 'min'}, {type : 'max'}]
+                                ]
+                            }
+                        },
+                        {
+                            name:'百度',
+                            type:'bar',
+                            barWidth : 5,
+                            stack: '搜索引擎',
+                            data:[620, 732, 701, 734, 1090, 1130, 1120]
+                        },
+                        {
+                            name:'谷歌',
+                            type:'bar',
+                            stack: '搜索引擎',
+                            data:[120, 132, 101, 134, 290, 230, 220]
+                        },
+                        {
+                            name:'必应',
+                            type:'bar',
+                            stack: '搜索引擎',
+                            data:[60, 72, 71, 74, 190, 130, 110]
+                        },
+                        {
+                            name:'其他',
+                            type:'bar',
+                            stack: '搜索引擎',
+                            data:[62, 82, 91, 84, 109, 110, 120]
+                        }
+                    ]
+                };
+
+
+                return option;
+            },
+            echart_8(){
+                var option = {
+                    title: {
+                        text: '堆叠区域图'
+                    },
+                    tooltip : {
+                        trigger: 'axis',
+                        axisPointer: {
+                            type: 'cross',
+                            label: {
+                                backgroundColor: '#6a7985'
+                            }
+                        }
+                    },
+                    legend: {
+                        data:['邮件营销','联盟广告','视频广告','直接访问','搜索引擎']
+                    },
+                    toolbox: {
+                        feature: {
+                            saveAsImage: {}
+                        }
+                    },
+                    grid: {
+                        left: '3%',
+                        right: '4%',
+                        bottom: '3%',
+                        containLabel: true
+                    },
+                    xAxis : [
+                        {
+                            type : 'category',
+                            boundaryGap : false,
+                            data : ['周一','周二','周三','周四','周五','周六','周日']
+                        }
+                    ],
+                    yAxis : [
+                        {
+                            type : 'value'
+                        }
+                    ],
+                    series : [
+                        {
+                            name:'邮件营销',
+                            type:'line',
+                            stack: '总量',
+                            areaStyle: {},
+                            data:[120, 132, 101, 134, 90, 230, 210]
+                        },
+                        {
+                            name:'联盟广告',
+                            type:'line',
+                            stack: '总量',
+                            areaStyle: {},
+                            data:[220, 182, 191, 234, 290, 330, 310]
+                        },
+                        {
+                            name:'视频广告',
+                            type:'line',
+                            stack: '总量',
+                            areaStyle: {},
+                            data:[150, 232, 201, 154, 190, 330, 410]
+                        },
+                        {
+                            name:'直接访问',
+                            type:'line',
+                            stack: '总量',
+                            areaStyle: {normal: {}},
+                            data:[320, 332, 301, 334, 390, 330, 320]
+                        },
+                        {
+                            name:'搜索引擎',
+                            type:'line',
+                            stack: '总量',
+                            label: {
+                                normal: {
+                                    show: true,
+                                    position: 'top'
+                                }
+                            },
+                            areaStyle: {normal: {}},
+                            data:[820, 932, 901, 934, 1290, 1330, 1320]
+                        }
+                    ]
+                };
+
+                return option;
+            },
+            echart_9(){
+                var option = {
+                    xAxis: {
+                        type: 'category',
+                        boundaryGap: false,
+                        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+                    },
+                    yAxis: {
+                        type: 'value'
+                    },
+                    series: [{
+                        data: [820, 932, 901, 934, 1290, 1330, 1320],
+                        type: 'line',
+                        areaStyle: {}
+                    }]
+                };
+
+
+
+                return option;
+            },
+            echart_10(){
+                var option = {
+                    title: {
+                        text: '折线图堆叠'
+                    },
+                    tooltip: {
+                        trigger: 'axis'
+                    },
+                    legend: {
+                        data:['邮件营销','联盟广告','视频广告','直接访问','搜索引擎']
+                    },
+                    grid: {
+                        left: '3%',
+                        right: '4%',
+                        bottom: '3%',
+                        containLabel: true
+                    },
+                    toolbox: {
+                        feature: {
+                            saveAsImage: {}
+                        }
+                    },
+                    xAxis: {
+                        type: 'category',
+                        boundaryGap: false,
+                        data: ['周一','周二','周三','周四','周五','周六','周日']
+                    },
+                    yAxis: {
+                        type: 'value'
+                    },
+                    series: [
+                        {
+                            name:'邮件营销',
+                            type:'line',
+                            stack: '总量',
+                            data:[120, 132, 101, 134, 90, 230, 210]
+                        },
+                        {
+                            name:'联盟广告',
+                            type:'line',
+                            stack: '总量',
+                            data:[220, 182, 191, 234, 290, 330, 310]
+                        },
+                        {
+                            name:'视频广告',
+                            type:'line',
+                            stack: '总量',
+                            data:[150, 232, 201, 154, 190, 330, 410]
+                        },
+                        {
+                            name:'直接访问',
+                            type:'line',
+                            stack: '总量',
+                            data:[320, 332, 301, 334, 390, 330, 320]
+                        },
+                        {
+                            name:'搜索引擎',
+                            type:'line',
+                            stack: '总量',
+                            data:[820, 932, 901, 934, 1290, 1330, 1320]
+                        }
+                    ]
+                };
+
+
+
                 return option;
             }
         }

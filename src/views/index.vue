@@ -184,13 +184,13 @@
                         font-family: PingFangSC-Regular;
                         font-size: 11px;
                         color: #9B9B9B;
-                        line-height: 7px;
+                        line-height: 14px;
                     }
                     .box_num{
                         font-family: HelveticaNeue;
                         font-size: 11px;
                         color: #000000;
-                        line-height: 7px;
+                        line-height: 14px;
                     }
                 }
                 .box_two_center{
@@ -199,7 +199,7 @@
                         font-family: PingFangSC-Regular;
                         font-size: 11px;
                         color: #9B9B9B;
-                        line-height: 7px;
+                        line-height: 14px;
                     }
                 }
                 .box_two_right{
@@ -208,19 +208,19 @@
                         font-family: HelveticaNeue;
                         font-size: 11px;
                         color: #000000;
-                        line-height: 7px;
+                        line-height: 14px;
                     }
                     .if_read{
                         font-family: PingFangSC-Regular;
                         font-size: 11px;
                         color: #E6655F;
-                        line-height: 7px;
+                        line-height: 14px;
                     }
                     .if_read_f{
                         font-family: PingFangSC-Regular;
                         font-size: 11px;
                         color: rgb(110,121,238);
-                        line-height: 7px;
+                        line-height: 14px;
                     }
                 }
             }
@@ -377,14 +377,14 @@
                 </div>
                 <div class="box_two">
                     <div class="box_two_left">
-                        <i style="font-size: 10px;color: #D8D8D8;margin-top:-5px;" class="icon iconfont icon-baogao-"></i>&nbsp;
+                        <i style="font-size: 10px;color: #D8D8D8;margin-top:-1px;" class="icon iconfont icon-baogao-"></i>&nbsp;
 
                         <span class="box_num_name">报告数量</span>
                         &nbsp;&nbsp;
                         <span class="box_num">{{view_data.first.num}}</span>
                     </div>
                     <div class="box_two_center">
-                        <i style="font-size: 10px;color: #D8D8D8;margin-top:-5px;" class="icon iconfont icon-zuixin-"></i>&nbsp;
+                        <i style="font-size: 10px;color: #D8D8D8;margin-top:-1px;" class="icon iconfont icon-zuixin-"></i>&nbsp;
                         <span class="box_num_name">最新报告</span>
                     </div>
                     <div class="box_two_right">
@@ -408,14 +408,14 @@
                 </div>
                 <div class="box_two">
                     <div class="box_two_left">
-                        <i style="font-size: 10px;color: #D8D8D8;margin-top:-5px;" class="icon iconfont icon-baogao-"></i>&nbsp;
+                        <i style="font-size: 10px;color: #D8D8D8;margin-top:-1px;" class="icon iconfont icon-baogao-"></i>&nbsp;
 
                         <span class="box_num_name">报告数量</span>
                         &nbsp;&nbsp;
                         <span class="box_num">{{view_data.second.num}}</span>
                     </div>
                     <div class="box_two_center">
-                        <i style="font-size: 10px;color: #D8D8D8;margin-top:-5px;" class="icon iconfont icon-zuixin-"></i>&nbsp;
+                        <i style="font-size: 10px;color: #D8D8D8;margin-top:-1px;" class="icon iconfont icon-zuixin-"></i>&nbsp;
                         <span class="box_num_name">最新报告</span>
                     </div>
                     <div class="box_two_right">
@@ -439,14 +439,14 @@
                 </div>
                 <div class="box_two">
                     <div class="box_two_left">
-                        <i style="font-size: 10px;color: #D8D8D8;margin-top:-5px;" class="icon iconfont icon-baogao-"></i>&nbsp;
+                        <i style="font-size: 10px;color: #D8D8D8;margin-top:-1px;" class="icon iconfont icon-baogao-"></i>&nbsp;
 
                         <span class="box_num_name">报告数量</span>
                         &nbsp;&nbsp;
                         <span class="box_num">{{view_data.third.num}}</span>
                     </div>
                     <div class="box_two_center">
-                        <i style="font-size: 10px;color: #D8D8D8;margin-top:-5px;" class="icon iconfont icon-zuixin-"></i>&nbsp;
+                        <i style="font-size: 10px;color: #D8D8D8;margin-top:-1px;" class="icon iconfont icon-zuixin-"></i>&nbsp;
                         <span class="box_num_name">最新报告</span>
                     </div>
                     <div class="box_two_right">
