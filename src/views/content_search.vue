@@ -535,12 +535,14 @@
 
                 <div slot="footer" style="text-align: center;margin: 10px 0 20px 0">
                     <div class="butoton_box">
-                        <Button shape="circle" style="width: 140px"><i style="font-size: 20px;color: #D8D8D8;" class="icon iconfont icon-export-"></i><span class="butoton_box_ld">导出</span></Button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <Button shape="circle" style="width: 140px"><i style="font-size: 20px;color: #D8D8D8;" class="icon iconfont icon-print-"></i><span class="butoton_box_ld">打印</span></Button>
+                        <Button @click="exportData()" shape="circle" style="width: 140px"><i style="font-size: 20px;color: #D8D8D8;" class="icon iconfont icon-export-"></i><span class="butoton_box_ld">导出</span></Button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <Button @click="print()" shape="circle" style="width: 140px"><i style="font-size: 20px;color: #D8D8D8;" class="icon iconfont icon-print-"></i><span class="butoton_box_ld">打印</span></Button>
                     </div>
 
                 </div>
             </Modal>
+            <!--excel导出-->
+            <Table hidden size="small" :columns="columns1" :data="data1" ref="table"></Table>
         </div>
         <div class="mobile_phone content_search_for_mobile only_search_for_mobile">
             <basis_msg_mobile title_value="请选择送检时间范围"></basis_msg_mobile>
@@ -667,7 +669,88 @@
                         check_room:'科室一',
                         result:'正常'
                     }
+                ],
+                columns1:[
+                    {
+                        "title": "姓名",
+                        "key": "name",
+                    },
+                    {
+                        "title": "性别",
+                        "key": "sex",
+                    },
+                    {
+                        "title": "身高",
+                        "key": "height",
+                    },
+                    {
+                        "title": "体重",
+                        "key": "heveay",
+                    },
+                    {
+                        "title": "年龄",
+                        "key": "age",
+                    },
+                    {
+                        "title": "血型",
+                        "key": "xue",
+                    },
+                    {
+                        "title": "过敏史",
+                        "key": "guo_ming",
+                    },
+                    {
+                        "title": "病院编号",
+                        "key": "num",
+                    },
+                    {
+                        "title": "送检科室",
+                        "key": "room_num",
+                    },
+                    {
+                        "title": "诊断结果",
+                        "key": "result",
+                    },
+                ],
+                data1:[
+                    {
+                        "name": "Name1",
+                        "sex": 0,
+                        "height": 7302,
+                        "heveay": 5627,
+                        "age": 1563,
+                        "xue": 4254,
+                        "guo_ming": 1438,
+                        "num": 274,
+                        "room_num": 285,
+                        "result": 1727,
+                    },
+                    {
+                        "name": "Name1",
+                        "sex": 0,
+                        "height": 7302,
+                        "heveay": 5627,
+                        "age": 1563,
+                        "xue": 4254,
+                        "guo_ming": 1438,
+                        "num": 274,
+                        "room_num": 285,
+                        "result": 1727,
+                    },
+                    {
+                        "name": "Name1",
+                        "sex": 0,
+                        "height": 7302,
+                        "heveay": 5627,
+                        "age": 1563,
+                        "xue": 4254,
+                        "guo_ming": 1438,
+                        "num": 274,
+                        "room_num": 285,
+                        "result": 1727,
+                    },
                 ]
+
             }
         },
 
@@ -741,7 +824,17 @@
             },
             radio_array(e){
                 console.log(e);
-            }
+            },
+            /*导出数据*/
+            exportData () {
+                this.$refs.table.exportCsv({
+                    filename: 'The original data'
+                });
+            },
+            /*打印*/
+            print(){
+                window.print()
+            },
         }
     }
 </script>
