@@ -260,97 +260,38 @@
                         </div>
                     </div>
                     <div class="title" style="background: #f8f8f9">
-                        <Row class="box_centr">
-                            <Col span="8">
+                        <Row class="box_centr" >
+                            <Col span="8" v-for="item in list">
                             <div class="box_ant" shadow>
                                 <div class="title_name">
                                     <div class="tsts">
                                         <div class="line_col"></div>
-                                        <span>VR产检</span>
+                                        <span>{{item.name}}</span>
                                     </div>
                                     <div class="naids">
                                         <!--<i style="font-size: 60px;color: #D8D8D8;" class="icon iconfont icon-fuchan-"></i>-->
                                         <img width="60" height="60" src="../images/fuchan-01.png" alt="">
                                     </div>
                                 </div>
-                                <div class="content_val_one">
+                                <!-- <div class="content_val_one">
                                     <i style="font-size: 16px;color: #D8D8D8;margin-top:-4px;" class="icon iconfont icon-baogao-"></i>&nbsp;&nbsp;&nbsp;&nbsp;
                                     <div class="name">报告数量：</div>
                                     <div class="values">{{view_data.first.num}}</div>
-                                </div>
+                                </div> -->
                                 <br>
-                                <div class="content_val_two">
+                                <!-- <div class="content_val_two">
                                     <i style="font-size: 16px;color: #D8D8D8;margin-top:-4px;" class="icon iconfont icon-zuixin-"></i>&nbsp;&nbsp;&nbsp;&nbsp;
                                     <div class="name">最新报告：</div>
                                     <div class="values">{{view_data.first.time}}</div>
                                     <div class="name_color" v-if="view_data.first.if_read == false">（未读）</div>
                                     <div class="name_color_read" v-else>（已读）</div>
-                                </div>
+                                </div> -->
                                 <div class="boxs_btns">
-                                    <Button class="click_btn" @click="view_data_route('first')" type="primary" shape="circle">查看报告</Button>
+                                    <Button class="click_btn" @click="view_data_route(item)" type="primary" shape="circle">查看报告</Button>
                                 </div>
                             </div>
                             </Col>
-                            <Col span="8">
-                            <div class="box_ant" shadow>
-                                <div class="title_name">
-                                    <div class="tsts">
-                                        <div class="line_col"></div>
-                                        <span>压力反应测试</span>
-                                    </div>
-                                    <div class="naids">
-                                        <!--<i style="font-size: 60px;color: #D8D8D8;" class="icon iconfont icon-fanying-"></i>-->
-                                        <img width="60" height="60" src="../images/fanying-01.png" alt="">
-                                    </div>
-                                </div>
-                                <div class="content_val_one">
-                                    <i style="font-size: 16px;color: #D8D8D8;margin-top:-4px;" class="icon iconfont icon-baogao-"></i>&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <div class="name">报告数量：</div>
-                                    <div class="values">{{view_data.second.num}}</div>
-                                </div>
-                                <br>
-                                <div class="content_val_two">
-                                    <i style="font-size: 16px;color: #D8D8D8;margin-top:-4px;" class="icon iconfont icon-zuixin-"></i>&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <div class="name">最新报告：</div>
-                                    <div class="values">{{view_data.second.time}}</div>
-                                    <div class="name_color" v-if="view_data.second.if_read == false">（未读）</div>
-                                    <div class="name_color_read" v-else>（已读）</div>
-                                </div>
-                                <div class="boxs_btns">
-                                    <Button class="click_btn" @click="view_data_route('second')" type="primary" shape="circle">查看报告</Button>
-                                </div>
-                            </div>
-                            </Col>
-                            <Col span="8">
-                            <div class="box_ant" shadow>
-                                <div class="title_name">
-                                    <div class="tsts">
-                                        <div class="line_col"></div>
-                                        <span>VR体能测试</span>
-                                    </div>
-                                    <div class="naids">
-                                        <!--<i style="font-size: 60px;color: #D8D8D8;" class="icon iconfont icon-tinengceshi-"></i>-->
-                                        <img width="60" height="60" src="../images/tinengceshi-01.png" alt="">
-                                    </div>
-                                </div>
-                                <div class="content_val_one">
-                                    <i style="font-size: 16px;color: #D8D8D8;margin-top:-4px;" class="icon iconfont icon-baogao-"></i>&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <div class="name">报告数量：</div>
-                                    <div class="values">{{view_data.third.num}}</div>
-                                </div>
-                                <br>
-                                <div class="content_val_two">
-                                    <i style="font-size: 16px;color: #D8D8D8;margin-top:-4px;" class="icon iconfont icon-zuixin-"></i>&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <div class="name">最新报告：</div>
-                                    <div class="values">{{view_data.third.time}}</div>
-                                    <div class="name_color" v-if="view_data.third.if_read == false">（未读）</div>
-                                    <div class="name_color_read" v-else>（已读）</div>
-                                </div>
-                                <div class="boxs_btns">
-                                    <Button class="click_btn" @click="view_data_route('third')" type="primary" shape="circle">查看报告</Button>
-                                </div>
-                            </div>
-                            </Col>
+                                                        
                         </Row>
                     </div>
                 </div>
@@ -367,15 +308,15 @@
         </div>
         <div class="mobile_phone index_for_mobile">
             <basis_msg_mobile title_value="请选择项目测试"></basis_msg_mobile>
-            <div class="box_for_item">
+            <div class="box_for_item" v-for="item in list">
                 <div class="box_one">
                     <div class="title_vr_left">
                         <div class="line_left"></div>
-                        <div class="title_vr">VR产检</div>
+                        <div class="title_vr">{{item.name}}</div>
                     </div>
                     <img width="30" height="30" src="../images/fuchan-01.png" alt="">
                 </div>
-                <div class="box_two">
+                <!-- <div class="box_two">
                     <div class="box_two_left">
                         <i style="font-size: 10px;color: #D8D8D8;margin-top:-1px;" class="icon iconfont icon-baogao-"></i>&nbsp;
 
@@ -393,70 +334,8 @@
                         <span class="if_read" v-if="view_data.first.if_read == false">(未读)</span>
                         <span class="if_read_f" v-else>(已读)</span>
                     </div>
-                </div>
-                <div class="box_three" @click="view_data_route('first')">
-                    查看报告
-                </div>
-            </div>
-            <div class="box_for_item">
-                <div class="box_one">
-                    <div class="title_vr_left">
-                        <div class="line_left"></div>
-                        <div class="title_vr">压力反应测试</div>
-                    </div>
-                    <img width="30" height="30" src="../images/fanying-01.png" alt="">
-                </div>
-                <div class="box_two">
-                    <div class="box_two_left">
-                        <i style="font-size: 10px;color: #D8D8D8;margin-top:-1px;" class="icon iconfont icon-baogao-"></i>&nbsp;
-
-                        <span class="box_num_name">报告数量</span>
-                        &nbsp;&nbsp;
-                        <span class="box_num">{{view_data.second.num}}</span>
-                    </div>
-                    <div class="box_two_center">
-                        <i style="font-size: 10px;color: #D8D8D8;margin-top:-1px;" class="icon iconfont icon-zuixin-"></i>&nbsp;
-                        <span class="box_num_name">最新报告</span>
-                    </div>
-                    <div class="box_two_right">
-                        <span class="time">{{view_data.second.time}}</span>
-                        &nbsp;&nbsp;
-                        <span class="if_read" v-if="view_data.second.if_read == false">(未读)</span>
-                        <span class="if_read_f" v-else>(已读)</span>
-                    </div>
-                </div>
-                <div class="box_three" @click="view_data_route('second')">
-                    查看报告
-                </div>
-            </div>
-            <div class="box_for_item">
-                <div class="box_one">
-                    <div class="title_vr_left">
-                        <div class="line_left"></div>
-                        <div class="title_vr">VR体能测试</div>
-                    </div>
-                    <img width="30" height="30" src="../images/tinengceshi-01.png" alt="">
-                </div>
-                <div class="box_two">
-                    <div class="box_two_left">
-                        <i style="font-size: 10px;color: #D8D8D8;margin-top:-1px;" class="icon iconfont icon-baogao-"></i>&nbsp;
-
-                        <span class="box_num_name">报告数量</span>
-                        &nbsp;&nbsp;
-                        <span class="box_num">{{view_data.third.num}}</span>
-                    </div>
-                    <div class="box_two_center">
-                        <i style="font-size: 10px;color: #D8D8D8;margin-top:-1px;" class="icon iconfont icon-zuixin-"></i>&nbsp;
-                        <span class="box_num_name">最新报告</span>
-                    </div>
-                    <div class="box_two_right">
-                        <span class="time">{{view_data.third.time}}</span>
-                        &nbsp;&nbsp;
-                        <span class="if_read" v-if="view_data.third.if_read == false">(未读)</span>
-                        <span class="if_read_f" v-else>(已读)</span>
-                    </div>
-                </div>
-                <div class="box_three" @click="view_data_route('third')">
+                </div> -->
+                <div class="box_three" @click="view_data_route(item)">
                     查看报告
                 </div>
             </div>
@@ -465,12 +344,13 @@
 </template>
 
 <script>
+    import $ from 'jquery';
     import baisis_msg from './basis_msg.vue';
     import basis_msg_mobile from './basis_msg_mobile.vue';
     export default {
         data () {
+           
             return {
-                theme3: 'dark',
                 view_data:{
                     first:{
                         num:12,
@@ -487,6 +367,9 @@
                         time:'2015-10-10',
                         if_read:false
                     }
+                },
+                list:{
+
                 }
             }
         },
@@ -499,8 +382,21 @@
 
             },
             view_data_route(e){
-                this.$router.push({ name: 'search', params: { page_show: e }})
+                this.$router.push({ name: 'search', params: { page_show: e },query:{userId:this.$route.query.userId,projectId:e.id}})
+            },
+
+            getProjects(){
+
             }
+        },
+        created(){
+            var _self=this;
+            $.get('http://api.mindfrog.cn/api/Platform/Project').then(function (response) {
+                //处理正常的逻辑数据处理
+                this.list=response;
+                console.log(this.list)
+                _self.list=this.list
+            });
         }
     }
 </script>

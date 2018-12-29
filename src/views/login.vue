@@ -252,8 +252,7 @@
                     this.$Message.error('请先填写要查询的编号');
                     return false;
                 }
-                that.$router.push({ name: 'date', params: { userId: 123 }})
-
+                that.$router.push({ name: 'index', query: { userId: that.value_num }})
             }
         }
     }

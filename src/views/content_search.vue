@@ -401,8 +401,8 @@
                                 <tr>
                                     <th></th>
                                     <th>报告编号</th>
-                                    <th>送检时间</th>
-                                    <th>报告时间</th>
+                                    <th>测试开始时间</th>
+                                    <th>测试结束时间</th>
                                     <th>送检医生</th>
                                     <th>送检人员</th>
                                     <th>报告字段1</th>
@@ -412,19 +412,25 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr v-for="(item,index) in table_list">
+                                <tr v-for="(item,index) in list">
                                     <td style="text-align: right;width: 50px">
                                         <Checkbox  @on-change="radio_array()" :value="index"
                                                style="color: #D75E5B!important;">
 
                                         </Checkbox>
                                     </td>
-                                    <td style="width: 80px">{{item.num}}</td>
-                                    <td style="font-size: 12px">{{item.check_time}}</td>
-                                    <td style="font-size: 12px;">{{item.come_time}}</td>
+                                    <td style="width: 80px">{{item._scopeId}}</td>
+                                    <td style="font-size: 12px">{{item.scopeStartTime}}</td>
+                                    <td style="font-size: 12px;">{{item.scopeEndTime}}</td>
                                     <td>{{item.doctor}}</td>
                                     <td>{{item.person}}</td>
-                                    <td>{{item.zi_duan}}</td>
+                                    <td>
+                                        <div class="selection-list" >
+                                            <ul>
+                                            <li v-for="(i, index) in item.visualize" @click="chooseSelection(i)">{{ i.name }}</li>
+                                            </ul>
+                                        </div>                                  
+                                    </td>                                   
                                     <td style="color: #E6655F">{{item.zi_duan_two}} <i style="transform: rotate(-180deg);color: #E6655F;font-size: 8px" class="icon iconfont icon-down-"></i></td>
                                     <td style="color: #7FC765">{{item.zi_duan_three}} <i style="transform: rotate(-180deg);color: #7FC765;font-size: 8px" class="icon iconfont icon-down-"></i></td>
                                     <td style="cursor: pointer" @click="click_alert(index)"><i style="font-size: 20px;color: rgb(204,204,204)" class="icon iconfont icon-baogao-"></i></td>
@@ -564,8 +570,8 @@
                 <thead>
                     <tr class="tr_for_tab">
                         <th>报告编号</th>
-                        <th>送检时间</th>
-                        <th>报告时间</th>
+                        <th>测试开始时间</th>
+                        <th>测试结束时间</th>
                         <th>送检医生</th>
                         <th></th>
                     </tr>
@@ -573,8 +579,8 @@
                 <tbody>
                     <tr v-for="(item,index) in table_list">
                         <td>{{item.num}}</td>
-                        <td>{{item.check_time}}</td>
-                        <td>{{item.come_time}}</td>
+                        <td>{{item.scopeStartTime}}</td>
+                        <td>{{item.scopeEndTime}}</td>
                         <td>{{item.doctor}}</td>
                         <td @click="route_mobile_to_alert(index)" style="padding-right: 5px"><i style="font-size: 15px;color: rgb(204,204,204);position: relative;top: 1px" class="icon iconfont icon-baogao-"></i></td>
                     </tr>
@@ -597,6 +603,7 @@
                 loading: true,
                 start_search_time:'',
                 end_search_time:'',
+                list:{},
                 table_list:[
                     {
                         num:123,
@@ -760,6 +767,8 @@
         },
         mounted(){
             const that=this;
+            var project=this.$route.params.page_show
+            that.getlist({UserId:this.$route.query.userId,ProjectId:project.id})
             $(".ivu-modal-header-inner").css({
                 'font-family': 'PingFangSC-Medium',
                 'font-size': '18px',
@@ -795,6 +804,14 @@
         methods:{
             exit(){
 
+            },
+            getlist (e) {
+                var _self=this;
+                $.get('http://api.mindfrog.cn/api/ProjectData/ListUserProjectScopes',e).then(function (response) {
+                //处理正常的逻辑数据处理
+                _self.list=response;
+                console.log(response)
+                });                
             },
             asyncOK () {
                 setTimeout(() => {
@@ -861,6 +878,9 @@
             route_mobile_to_alert(index){
                 this.$router.push({ name: 'search_mobile', params: { data: index }})
             },
+            chooseSelection(e){
+                window.open(e.url)
+            }
         }
     }
 </script>
