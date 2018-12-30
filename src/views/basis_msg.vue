@@ -131,7 +131,7 @@
 </style>
 <template>
     <div class="box_all">
-        <div class="aside">
+       <!-- <div class="aside">
             <br>
             <br>
             <div class="demo-avatar">
@@ -207,7 +207,7 @@
             </Row>
             <br>
 
-        </div>
+        </div>-->
         <div class="box_content">
             <div class="tops_title">
 

@@ -22,7 +22,7 @@
                     .box_data{
                         position: absolute;
                         bottom: -30px;
-                        left: 36%;
+                        left: 39%;
                         display: flex;
                         font-family: PingFangSC-Regular;
                         font-size: 12px;
@@ -120,13 +120,13 @@
         <div class="search_only computer">
             <baisis_msg></baisis_msg>
             <div class="detail_show">
-                <div class="xu_ni"></div>
+
                 <div class="contents_detail">
                     <div class="title_tagss">
                         <div class="postitaons">
                             <i style="font-size: 8px;color: #D8D8D8;" class="icon iconfont icon-arrow-"></i>
 
-                            <span>首页</span>
+                            <span style="cursor: pointer" @click="return_index()">首页</span>
                             &nbsp;&nbsp;&nbsp;&nbsp;
                             <i style="font-size: 8px;color: #D8D8D8;" class="icon iconfont icon-arrow-"></i>
 
@@ -175,7 +175,6 @@
             </div>
 
             <div class="box_logo_bottom">
-                <div class="xu_ni_new"></div>
                 <img height="30" src="../images/mindfrog.png" alt="">
 
                 <span>
@@ -333,6 +332,9 @@
                 $(".popper__arrow").remove();
             },
             search_list(){
+                this.$router.push({ name: 'index', params: { userId: 123 }})
+            },
+            return_index(){
                 this.$router.push({ name: 'index', params: { userId: 123 }})
             }
         }

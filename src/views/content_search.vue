@@ -73,7 +73,7 @@
         height: 900px;
     }
     .contents_detail{
-        width: 84%;
+        width: 100%;
         background: #FAFAFA;
         .title_tagss{
             height: 50px;
@@ -91,7 +91,7 @@
                 position: absolute;
             }
             .postitao_ctr{
-                width: 84%;
+                width: 100%;
                 text-align: center;
                 .center_tlt{
                     font-family: PingFangSC-Regular;
@@ -267,6 +267,19 @@
         }
     }
 
+    .view_btn{
+        cursor: pointer;
+        background: #E6655F;
+        border-radius: 22px;
+        text-align: center;
+        height: 28px;
+        width: 100px;
+        line-height: 28px;
+
+        font-family: PingFangSC-Regular;
+        font-size: 12px;
+        color: #FFFFFF;
+    }
     .content_search_for_mobile{
         .table_css  {
             margin-top: 10px;
@@ -361,14 +374,15 @@
     <div>
         <div class="search_content computer">
             <baisis_msg></baisis_msg>
-            <div class="detail_show">
-                <div class="xu_ni"></div>
+            <div class="detail_show" style="min-height: 860px">
                 <div class="contents_detail">
                     <div class="title_tagss">
                         <div class="postitaons">
                             <i style="font-size: 8px;color: #D8D8D8;" class="icon iconfont icon-arrow-"></i>
 
-                            <span>首页</span>&nbsp;&nbsp;&nbsp;
+                            <span style="cursor: pointer" @click="return_index()">首页</span>
+
+                            &nbsp;&nbsp;&nbsp;&nbsp;
                             <i style="font-size: 8px;color: #D8D8D8;" class="icon iconfont icon-arrow-"></i>
 
                             <span>压力反应测试</span>
@@ -399,35 +413,18 @@
                             <table class="table_real">
                                 <thead>
                                 <tr>
-                                    <th></th>
-                                    <th>报告编号</th>
-                                    <th>送检时间</th>
-                                    <th>报告时间</th>
-                                    <th>送检医生</th>
-                                    <th>送检人员</th>
-                                    <th>报告字段1</th>
-                                    <th>报告字段2</th>
-                                    <th>报告字段3</th>
+                                    <th>序号</th>
+                                    <th>时间</th>
                                     <th></th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr v-for="(item,index) in table_list">
-                                    <td style="text-align: right;width: 50px">
-                                        <Checkbox  @on-change="radio_array()" :value="index"
-                                               style="color: #D75E5B!important;">
-
-                                        </Checkbox>
-                                    </td>
-                                    <td style="width: 80px">{{item.num}}</td>
+                                    <td style="width: 80px">{{index+1}}</td>
                                     <td style="font-size: 12px">{{item.check_time}}</td>
-                                    <td style="font-size: 12px;">{{item.come_time}}</td>
-                                    <td>{{item.doctor}}</td>
-                                    <td>{{item.person}}</td>
-                                    <td>{{item.zi_duan}}</td>
-                                    <td style="color: #E6655F">{{item.zi_duan_two}} <i style="transform: rotate(-180deg);color: #E6655F;font-size: 8px" class="icon iconfont icon-down-"></i></td>
-                                    <td style="color: #7FC765">{{item.zi_duan_three}} <i style="transform: rotate(-180deg);color: #7FC765;font-size: 8px" class="icon iconfont icon-down-"></i></td>
-                                    <td style="cursor: pointer" @click="click_alert(index)"><i style="font-size: 20px;color: rgb(204,204,204)" class="icon iconfont icon-baogao-"></i></td>
+                                    <td style="cursor: pointer;width: 200px" @click="view_caht(index)">
+                                        <div class="view_btn">查看</div>
+                                    </td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -435,23 +432,13 @@
 
                         <div class="buton_choise">
 
-                            <Button @click="view_caht()" class="btin" type="primary" shape="circle">
-                                <img src="../images/tubiao-01.png" style="position: relative;top: 2px" height="22" alt="">
-                                &nbsp;&nbsp;<span>按图标展示</span>
-                            </Button>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <Button @click="pai_ming()" class="btin" type="primary" shape="circle">
-                                <img src="../images/ranking-01.png" style="position: relative;top: 2px" height="22" alt="">
-                                &nbsp;&nbsp;<span>查看排名</span>
-                            </Button>
                         </div>
                     </div>
 
                 </div>
             </div>
 
-            <div class="box_logo_bottom">
-                <div class="xu_ni_new"></div>
+            <div class="box_logo_bottom" style="position: relative">
                 <img height="30" src="../images/mindfrog.png" alt="">
 
                 <span>
@@ -494,43 +481,6 @@
                         </table>
                     </div>
 
-                    <!--<div class="titles">
-                        患者信息
-                    </div>
-                    <table>
-                        <tbody>
-                        <tr>
-                            <td class="name_black">编号</td><td class="name_black">编号</td>
-                            <td class="name_black">编号</td><td class="name_black">编号</td>
-                        </tr>
-                        <tr>
-                            <td>体重</td><td>张三</td>
-                            <td>年龄</td><td>张三</td>
-                        </tr>
-                        <tr>
-                            <td>体重</td><td>张三</td>
-                            <td>年龄</td><td>张三</td>
-                        </tr>
-                        </tbody>
-                    </table>
-
-                    <div class="titles">
-                        患者信息
-                    </div>
-                    <table>
-                        <tbody>
-                        <tr>
-                            <td class="name_black">姓名</td><td>张三</td>
-                            <td class="name_black">性别</td><td>张三</td>
-                            <td class="name_black">身高</td><td>张三</td>
-                        </tr>
-                        <tr>
-                            <td class="name_black">体重</td><td>张三</td>
-                            <td class="name_black">年龄</td><td>张三</td>
-                            <td class="name_black">血型</td><td>张三</td>
-                        </tr>
-                        </tbody>
-                    </table>-->
                 </div>
 
                 <div slot="footer" style="text-align: center;margin: 10px 0 20px 0">
@@ -774,7 +724,6 @@
                 position:[0,1],
                 callback:function(indexArr, data){
                     console.log(data); //返回选中的json数据
-
                     that.start_search_time=data;
                 }
             });
@@ -861,6 +810,10 @@
             route_mobile_to_alert(index){
                 this.$router.push({ name: 'search_mobile', params: { data: index }})
             },
+
+            return_index(){
+                this.$router.push({ name: 'index', params: { userId: 123 }})
+            }
         }
     }
 </script>

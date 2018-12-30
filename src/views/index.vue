@@ -2,7 +2,7 @@
 
     .index_all{
         .contents_detail{
-            width: 84%;
+            width: 100%;
             background: #FAFAFA;
             .title_tagss{
                 height: 50px;
@@ -20,7 +20,7 @@
                     position: absolute;
                 }
                 .postitao_ctr{
-                    width: 84%;
+                    width: 100%;
                     text-align: center;
                     .center_tlt{
                         font-family: PingFangSC-Regular;
@@ -35,6 +35,8 @@
                 background: #FAFAFA;
                 .box_centr{
                     background: #FAFAFA;
+                    display: flex;
+                    justify-content:center;
                     .box_ant{
                         border-radius: 6px;
                         height: 260px;
@@ -81,11 +83,13 @@
                         }
                         .boxs_btns{
                             margin-top: 30px;
+                            display: flex;
+                            justify-content: space-between;
                             .click_btn{
                                 background: #FFFFFF;
                                 border: 1px solid #E7E7E7;
                                 border-radius: 22px;
-                                width: 100%;
+                                width: 30%;
                                 height: 40px;
                                 font-family: PingFangSC-Medium;
                                 font-size: 14px;
@@ -239,125 +243,109 @@
             }
         }
     }
+    body{
+        height: 100% !important;
+        position: relative!important;
+        padding: 0 0 60px 0;
+    }
+    html{
+        height: 100% !important;
+    }
+    .box_logo_bottom{
+        position: absolute;
+        bottom: 0;
+    }
 </style>
 <template>
     <div>
         <div class="index_all computer">
-            <baisis_msg></baisis_msg>
+            <div>
+                <baisis_msg></baisis_msg>
 
-            <div class="box_flowing">
-                <div class="xu_ni"></div>
-                <div class="contents_detail">
-                    <div class="title_tagss">
-                        <div class="postitaons">
-                            <i style="font-size: 8px;color: #D8D8D8;" class="icon iconfont icon-arrow-"></i>
+                <div class="box_flowing">
+                    <div class="contents_detail">
+                        <div class="title_tagss">
+                            <div class="postitaons">
+                                <i style="font-size: 8px;color: #D8D8D8;" class="icon iconfont icon-arrow-"></i>
 
-                            <span>首页</span>
+
+                                <span style="cursor: pointer" @click="return_index()">首页</span>
+                            </div>
+                            <div class="postitao_ctr">
+                                <i style="font-size: 8px;color: #D8D8D8;" class="icon iconfont icon-remind-"></i>
+                                <span class="center_tlt">请选择测试项目</span>
+                            </div>
                         </div>
-                        <div class="postitao_ctr">
-                            <i style="font-size: 8px;color: #D8D8D8;" class="icon iconfont icon-remind-"></i>
-                            <span class="center_tlt">请选择测试项目</span>
+                        <div class="title" style="background: #f8f8f9">
+                            <Row class="box_centr">
+                                <Col span="8">
+                                <div class="box_ant" shadow>
+                                    <div class="title_name">
+                                        <div class="tsts">
+                                            <div class="line_col"></div>
+                                            <span>康复室</span>
+                                        </div>
+                                        <div class="naids">
+                                            <!--<i style="font-size: 60px;color: #D8D8D8;" class="icon iconfont icon-fuchan-"></i>-->
+                                            <img width="60" height="60" src="../images/fuchan-01.png" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="boxs_btns">
+                                        <Button class="click_btn" @click="view_data_route('room_first')" type="primary" shape="circle">CPT</Button>
+                                        <Button class="click_btn" @click="view_data_route('room_two')" type="primary" shape="circle">Stroop Test</Button>
+                                        <Button class="click_btn" @click="view_data_route('room_three')" type="primary" shape="circle">Audio</Button>
+                                    </div>
+                                    <div class="boxs_btns">
+                                        <Button class="click_btn" @click="view_data_route('room_four')" type="primary" shape="circle">Visual</Button>
+                                        <Button class="click_btn" @click="view_data_route('room_five')" type="primary" shape="circle">WordPair</Button>
+                                        <Button class="click_btn" @click="view_data_route('room_six')" type="primary" shape="circle">WCST</Button>
+                                    </div>
+                                </div>
+                                </Col>
+                                <Col span="8">
+                                <div class="box_ant" shadow>
+                                    <div class="title_name">
+                                        <div class="tsts">
+                                            <div class="line_col"></div>
+                                            <span>虚拟教室</span>
+                                        </div>
+                                        <div class="naids">
+                                            <!--<i style="font-size: 60px;color: #D8D8D8;" class="icon iconfont icon-fuchan-"></i>-->
+                                            <img width="60" height="60" src="../images/fuchan-01.png" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="boxs_btns">
+                                        <Button class="click_btn" @click="view_data_route('room_first')" type="primary" shape="circle">CPT</Button>
+                                        <Button class="click_btn" @click="view_data_route('room_two')" type="primary" shape="circle">Audio</Button>
+                                        <Button class="click_btn" @click="view_data_route('room_three')" type="primary" shape="circle">WCST</Button>
+                                    </div>
+                                </div>
+                                </Col>
+                                <Col span="8">
+                                <div class="box_ant" shadow>
+                                    <div class="title_name">
+                                        <div class="tsts">
+                                            <div class="line_col"></div>
+                                            <span>超市</span>
+                                        </div>
+                                        <div class="naids">
+                                            <!--<i style="font-size: 60px;color: #D8D8D8;" class="icon iconfont icon-fanying-"></i>-->
+                                            <img width="60" height="60" src="../images/fanying-01.png" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="boxs_btns" style="justify-content: flex-start">
+                                        <Button class="click_btn" @click="view_data_route('shop_one')" type="primary" style="margin-right: 20px" shape="circle">货架模式</Button>
+                                        <Button class="click_btn" @click="view_data_route('shop_two')" type="primary" shape="circle">标准模式</Button>
+                                    </div>
+                                </div>
+                                </Col>
+                            </Row>
                         </div>
-                    </div>
-                    <div class="title" style="background: #f8f8f9">
-                        <Row class="box_centr">
-                            <Col span="8">
-                            <div class="box_ant" shadow>
-                                <div class="title_name">
-                                    <div class="tsts">
-                                        <div class="line_col"></div>
-                                        <span>VR产检</span>
-                                    </div>
-                                    <div class="naids">
-                                        <!--<i style="font-size: 60px;color: #D8D8D8;" class="icon iconfont icon-fuchan-"></i>-->
-                                        <img width="60" height="60" src="../images/fuchan-01.png" alt="">
-                                    </div>
-                                </div>
-                                <div class="content_val_one">
-                                    <i style="font-size: 16px;color: #D8D8D8;margin-top:-4px;" class="icon iconfont icon-baogao-"></i>&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <div class="name">报告数量：</div>
-                                    <div class="values">{{view_data.first.num}}</div>
-                                </div>
-                                <br>
-                                <div class="content_val_two">
-                                    <i style="font-size: 16px;color: #D8D8D8;margin-top:-4px;" class="icon iconfont icon-zuixin-"></i>&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <div class="name">最新报告：</div>
-                                    <div class="values">{{view_data.first.time}}</div>
-                                    <div class="name_color" v-if="view_data.first.if_read == false">（未读）</div>
-                                    <div class="name_color_read" v-else>（已读）</div>
-                                </div>
-                                <div class="boxs_btns">
-                                    <Button class="click_btn" @click="view_data_route('first')" type="primary" shape="circle">查看报告</Button>
-                                </div>
-                            </div>
-                            </Col>
-                            <Col span="8">
-                            <div class="box_ant" shadow>
-                                <div class="title_name">
-                                    <div class="tsts">
-                                        <div class="line_col"></div>
-                                        <span>压力反应测试</span>
-                                    </div>
-                                    <div class="naids">
-                                        <!--<i style="font-size: 60px;color: #D8D8D8;" class="icon iconfont icon-fanying-"></i>-->
-                                        <img width="60" height="60" src="../images/fanying-01.png" alt="">
-                                    </div>
-                                </div>
-                                <div class="content_val_one">
-                                    <i style="font-size: 16px;color: #D8D8D8;margin-top:-4px;" class="icon iconfont icon-baogao-"></i>&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <div class="name">报告数量：</div>
-                                    <div class="values">{{view_data.second.num}}</div>
-                                </div>
-                                <br>
-                                <div class="content_val_two">
-                                    <i style="font-size: 16px;color: #D8D8D8;margin-top:-4px;" class="icon iconfont icon-zuixin-"></i>&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <div class="name">最新报告：</div>
-                                    <div class="values">{{view_data.second.time}}</div>
-                                    <div class="name_color" v-if="view_data.second.if_read == false">（未读）</div>
-                                    <div class="name_color_read" v-else>（已读）</div>
-                                </div>
-                                <div class="boxs_btns">
-                                    <Button class="click_btn" @click="view_data_route('second')" type="primary" shape="circle">查看报告</Button>
-                                </div>
-                            </div>
-                            </Col>
-                            <Col span="8">
-                            <div class="box_ant" shadow>
-                                <div class="title_name">
-                                    <div class="tsts">
-                                        <div class="line_col"></div>
-                                        <span>VR体能测试</span>
-                                    </div>
-                                    <div class="naids">
-                                        <!--<i style="font-size: 60px;color: #D8D8D8;" class="icon iconfont icon-tinengceshi-"></i>-->
-                                        <img width="60" height="60" src="../images/tinengceshi-01.png" alt="">
-                                    </div>
-                                </div>
-                                <div class="content_val_one">
-                                    <i style="font-size: 16px;color: #D8D8D8;margin-top:-4px;" class="icon iconfont icon-baogao-"></i>&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <div class="name">报告数量：</div>
-                                    <div class="values">{{view_data.third.num}}</div>
-                                </div>
-                                <br>
-                                <div class="content_val_two">
-                                    <i style="font-size: 16px;color: #D8D8D8;margin-top:-4px;" class="icon iconfont icon-zuixin-"></i>&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <div class="name">最新报告：</div>
-                                    <div class="values">{{view_data.third.time}}</div>
-                                    <div class="name_color" v-if="view_data.third.if_read == false">（未读）</div>
-                                    <div class="name_color_read" v-else>（已读）</div>
-                                </div>
-                                <div class="boxs_btns">
-                                    <Button class="click_btn" @click="view_data_route('third')" type="primary" shape="circle">查看报告</Button>
-                                </div>
-                            </div>
-                            </Col>
-                        </Row>
                     </div>
                 </div>
             </div>
 
             <div class="box_logo_bottom">
-                <div class="xu_ni_new"></div>
                 <img height="30" src="../images/mindfrog.png" alt="">
 
                 <span>
@@ -500,6 +488,9 @@
             },
             view_data_route(e){
                 this.$router.push({ name: 'search', params: { page_show: e }})
+            },
+            return_index(){
+                this.$router.push({ name: 'index', params: { userId: 123 }})
             }
         }
     }
