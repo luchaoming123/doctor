@@ -113,7 +113,7 @@
                         <Row>
                             <Col span="24" class="view_chart">
                                 <div class="pad_10 show_wordst">
-                                    {{show_contents}}
+                                    {{data_return.table_four.name}}：{{data_return.table_four.data}}
                                 </div>
                             </Col>
                         </Row>
@@ -167,6 +167,95 @@
         data () {
             return {
                 show_contents:'大风刮过或或或军军军军',
+                table_list:[],
+                data_return:{
+                    table_two:{
+                        "name": "眼动数据",
+                        "data": [
+                            {
+                                "timestamp": "2019-01-01T12:58:36.1019086+00:00",
+                                "x": 1.25,
+                                "y": 0,
+                                "z": 0,
+                                "w": 0
+                            },
+                            {
+                                "timestamp": "2019-01-01T12:58:36.1029086+00:00",
+                                "x": 1.24929655,
+                                "y": 0.001249297,
+                                "z": 0,
+                                "w": 0
+                            },
+                            {
+                                "timestamp": "2019-01-01T12:58:36.1039086+00:00",
+                                "x": 1.24719024,
+                                "y": 0.002494384,
+                                "z": 0,
+                                "w": 0
+                            },
+                        ]
+                    },
+                    /*历史数据*/
+                    table_five:{
+                        "name": "历史数据",
+                        "data": [
+                            {
+                                "name": "测试属性0",
+                                "data": [
+                                    77,
+                                    9,
+                                    9,
+                                    48,
+                                    5
+                                ]
+                            },
+                            {
+                                "name": "测试属性1",
+                                "data": [
+                                    98,
+                                    46,
+                                    91,
+                                    60,
+                                    18
+                                ]
+                            },
+                            {
+                                "name": "测试属性2",
+                                "data": [
+                                    48,
+                                    100,
+                                    13,
+                                    83,
+                                    42
+                                ]
+                            }
+                        ]
+                    },
+                    /*单次排比*/
+                    table_three:{
+                        "name": "群体排比",
+                        "data": [
+                            {
+                                "name": "测试属性0",
+                                "percentile": 87
+                            },
+                            {
+                                "name": "测试属性1",
+                                "percentile": 32
+                            },
+                            {
+                                "name": "测试属性2",
+                                "percentile": 25
+                            }
+                        ]
+                    },
+                    /*任务表现*/
+                    table_four:{
+                        "name": "耗时",
+                        "data": "56.76566s"
+                    },
+
+                }
 
             }
         },
@@ -229,11 +318,41 @@
             myChart_10.setOption(this.echart_10());
 
         },
+
+        beforeCreate(){
+            //路由拿到的参数，请使用这个
+            console.log(this.$route.params);
+
+            const that=this;
+            $.ajax({
+                url:'http://api.mindfrog.cn/api/Visualize/GetVisualizeData?ProjectId=supermarket&ScopeId=string&ChartId=Percentile',
+                type:'post',
+                data:{
+                    ProjectId:'vrclassroom',
+                    ScopeId:'string',
+                    ChartId:'History'
+                },
+                dataType:'JSON',
+                success:function (data) {
+                    that.table_list=data;
+                },
+                error:function (data) {
+
+                }
+            })
+        },
         methods:{
             exit(){
 
             },
             echart_one(){
+                let that=this;
+                var save_data_x=[];
+                var save_data_y=[];
+                $.each(that.data_return.table_two.data,function (index,element) {
+                    save_data_x.push(element.x);
+                    save_data_y.push(element.y);
+                });
 
                 var option = {
                     title: {
@@ -241,23 +360,14 @@
                     },
                     xAxis: {
                         type: 'category',
-                        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+                        data: save_data_x
                     },
                     yAxis: {
                         type: 'value'
                     },
-                    series: [{
-                        data: [233, 932, 901, 934, 1290, 1330, 120],
-                        type: 'line',
-                        smooth: true
-                    },
+                    series: [
                         {
-                            data: [144, 932, 901, 934, 1290, 1330, 320],
-                            type: 'line',
-                            smooth: true
-                        },
-                        {
-                            data: [533, 932, 901, 934, 1290, 130, 1320],
+                            data: save_data_y,
                             type: 'line',
                             smooth: true
                         }
@@ -268,6 +378,11 @@
 
             },
             echart_two(){
+                let that=this;
+                var save_data=[];
+                $.each(that.data_return.table_two.data,function (index,element) {
+                    save_data.push([element.x,element.y]);
+                });
                 var option = {
                     title: {
                         text: '眼动数据'
@@ -276,19 +391,7 @@
                     yAxis: {},
                     series: [{
                         symbolSize: 20,
-                        data: [
-                            [10.0, 8.04],
-                            [8.0, 6.95],
-                            [13.0, 7.58],
-                            [9.0, 8.81],
-                            [192.0, 108],
-                            [14.0, 9.96],
-                            [6.0, 7.24],
-                            [4.0, 4.26],
-                            [12.0, 10.84],
-                            [7.0, 4.82],
-                            [5.0, 5.68]
-                        ],
+                        data: save_data,
                         type: 'scatter'
                     }]
                 };
@@ -297,6 +400,13 @@
                 return option;
             },
             echart_three(){
+                let that=this;
+                var save_data=[];
+                $.each(that.data_return.table_three.data,function (index,element) {
+                    save_data.push([element.x,element.y]);
+                });
+
+
                 var symbolSize = 20;
                 var data = [[15, 0], [-50, 10], [-56.5, 20], [-46.5, 30], [-22.1, 40]];
 
@@ -307,7 +417,7 @@
                     tooltip: {
                         triggerOn: 'none',
                         formatter: function (params) {
-                            return 'X: ' + params.data[0].toFixed(2) + '<br>Y: ' + params.data[1].toFixed(2);
+
                         }
                     },
                     grid: {
@@ -456,21 +566,33 @@
                 return option;
             },
             echart_10(){
+
+                let that=this;
+                var save_data_x;
+                var save_data_y=[];
+                $.each(that.data_return.table_five.data,function (index,element) {
+                    save_data_y.push({
+                        data:element.data,
+                        type: 'line'
+                    });
+                    save_data_x=[]
+                    $.each(element.data,function (index_two,element_two) {
+                        save_data_x.push(index_two);
+                    });
+                });
+
                 var option = {
                     title: {
                         text: '历史数据'
                     },
                     xAxis: {
                         type: 'category',
-                        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+                        data: save_data_x
                     },
                     yAxis: {
                         type: 'value'
                     },
-                    series: [{
-                        data: [820, 932, 901, 934, 1290, 1330, 1320],
-                        type: 'line'
-                    }]
+                    series: save_data_y
                 };
 
 

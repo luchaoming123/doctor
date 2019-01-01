@@ -419,10 +419,10 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr v-for="(item,index) in table_list">
+                                <tr v-for="(item,index) in table_return">
                                     <td style="width: 80px">{{index+1}}</td>
-                                    <td style="font-size: 12px">{{item.check_time}}</td>
-                                    <td style="cursor: pointer;width: 200px" @click="view_caht(index)">
+                                    <td style="font-size: 12px">{{item.scopeEndTime}}</td>
+                                    <td style="cursor: pointer;width: 200px" @click="view_caht(item)">
                                         <div class="view_btn">查看</div>
                                     </td>
                                 </tr>
@@ -699,14 +699,80 @@
                         "room_num": 285,
                         "result": 1727,
                     },
+                ],
+                /*接口返回的数据*/
+                table_return:[
+                    {
+                        "number": 0,
+                        "_userId": "string",
+                        "_scopeId": "string",
+                        "scopeStartTime": "2018-12-31T13:31:28.684Z",
+                        "scopeEndTime": "2018-12-31T13:31:28.684Z",
+                        "_projectId": "string",
+                        "visualize": [
+                            {
+                                "projectId": "string",
+                                "name": "string",
+                                "dataCategory": "string",
+                                "chartId": "string",
+                                "chartType": "SimpleString",
+                                "dataType": "SimpleString",
+                                "url": "string",
+                                "categoryDisplayName": "string"
+                            }
+                        ]
+                    },
+                    {
+                        "number": 0,
+                        "_userId": "string",
+                        "_scopeId": "string",
+                        "scopeStartTime": "2018-12-31T13:31:28.684Z",
+                        "scopeEndTime": "2018-12-31T13:31:28.684Z",
+                        "_projectId": "string",
+                        "visualize": [
+                            {
+                                "projectId": "string",
+                                "name": "string",
+                                "dataCategory": "string",
+                                "chartId": "string",
+                                "chartType": "SimpleString",
+                                "dataType": "SimpleString",
+                                "url": "string",
+                                "categoryDisplayName": "string"
+                            }
+                        ]
+                    }
                 ]
-
             }
         },
 
         components:{
             baisis_msg,
             basis_msg_mobile
+        },
+        beforeCreate(){
+
+            //路由拿到的参数，请使用这个
+            console.log(this.$route.params);
+
+            const that=this;
+            $.ajax({
+                url:'/api/ProjectData/ListUserProjects',
+                type:'post',
+                data:{
+                    input:{
+                        "userId": "vrclassroom"
+                    }
+                },
+                dataType:'JSON',
+                success:function (data) {
+                    that.table_return=data;
+                },
+                error:function (data) {
+
+                }
+            })
+
         },
         mounted(){
             const that=this;
@@ -754,8 +820,9 @@
                 /*e表示当前点击的是第几个参数*/
                 this.modal6 = true
             },
-            view_caht(){
-                this.$router.push({ name: 'echart', params: { userId: 123 }})
+            view_caht(e){
+                /*e为要传递的参数*/
+                this.$router.push({ name: 'echart', params: { userId: e }})
             },
             pai_ming(){
                 this.$router.push({ name: 'sort', params: { userId: 123 }})

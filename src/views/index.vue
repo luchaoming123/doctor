@@ -36,7 +36,8 @@
                 .box_centr{
                     background: #FAFAFA;
                     display: flex;
-                    justify-content:center;
+                    justify-content:flex-start;
+                    flex-wrap: wrap;
                     .box_ant{
                         border-radius: 6px;
                         height: 260px;
@@ -84,12 +85,14 @@
                         .boxs_btns{
                             margin-top: 30px;
                             display: flex;
-                            justify-content: space-between;
+                            justify-content: flex-start;
+                            flex-wrap: wrap;
                             .click_btn{
                                 background: #FFFFFF;
                                 border: 1px solid #E7E7E7;
                                 border-radius: 22px;
                                 width: 30%;
+                                margin: 5px;
                                 height: 40px;
                                 font-family: PingFangSC-Medium;
                                 font-size: 14px;
@@ -278,39 +281,55 @@
                         </div>
                         <div class="title" style="background: #f8f8f9">
                             <Row class="box_centr">
-                                <Col span="8">
-                                <div class="box_ant" shadow>
+                                <Col span="8" v-for="(item,index) in product_list">
+                                    <div class="box_ant" shadow>
                                     <div class="title_name">
                                         <div class="tsts">
                                             <div class="line_col"></div>
-                                            <span>康复室</span>
+                                            <span>{{item.project.name}}</span>
                                         </div>
                                         <div class="naids">
-                                            <!--<i style="font-size: 60px;color: #D8D8D8;" class="icon iconfont icon-fuchan-"></i>-->
                                             <img width="60" height="60" src="../images/fuchan-01.png" alt="">
                                         </div>
                                     </div>
                                     <div class="boxs_btns">
-                                        <Button class="click_btn" @click="view_data_route('room_first')" type="primary" shape="circle">CPT</Button>
-                                        <Button class="click_btn" @click="view_data_route('room_two')" type="primary" shape="circle">Stroop Test</Button>
-                                        <Button class="click_btn" @click="view_data_route('room_three')" type="primary" shape="circle">Audio</Button>
-                                    </div>
-                                    <div class="boxs_btns">
-                                        <Button class="click_btn" @click="view_data_route('room_four')" type="primary" shape="circle">Visual</Button>
-                                        <Button class="click_btn" @click="view_data_route('room_five')" type="primary" shape="circle">WordPair</Button>
-                                        <Button class="click_btn" @click="view_data_route('room_six')" type="primary" shape="circle">WCST</Button>
+                                        <Button v-for="(item_two,index_two) in item.project.projectModes" class="click_btn" @click="view_data_route(item)" type="primary" shape="circle">{{item_two.displayName}}</Button>
                                     </div>
                                 </div>
                                 </Col>
+                                <!--<Col span="8">
+                                    <div class="box_ant" shadow>
+                                        <div class="title_name">
+                                            <div class="tsts">
+                                                <div class="line_col"></div>
+                                                <span>康复室</span>
+                                            </div>
+                                            <div class="naids">
+                                                &lt;!&ndash;<i style="font-size: 60px;color: #D8D8D8;" class="icon iconfont icon-fuchan-"></i>&ndash;&gt;
+                                                <img width="60" height="60" src="../images/fuchan-01.png" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="boxs_btns">
+                                            <Button class="click_btn" @click="view_data_route('room_first')" type="primary" shape="circle">CPT</Button>
+                                            <Button class="click_btn" @click="view_data_route('room_two')" type="primary" shape="circle">Stroop Test</Button>
+                                            <Button class="click_btn" @click="view_data_route('room_three')" type="primary" shape="circle">Audio</Button>
+                                        </div>
+                                        <div class="boxs_btns">
+                                            <Button class="click_btn" @click="view_data_route('room_four')" type="primary" shape="circle">Visual</Button>
+                                            <Button class="click_btn" @click="view_data_route('room_five')" type="primary" shape="circle">WordPair</Button>
+                                            <Button class="click_btn" @click="view_data_route('room_six')" type="primary" shape="circle">WCST</Button>
+                                        </div>
+                                    </div>
+                                </Col>
                                 <Col span="8">
-                                <div class="box_ant" shadow>
+                                    <div class="box_ant" shadow>
                                     <div class="title_name">
                                         <div class="tsts">
                                             <div class="line_col"></div>
                                             <span>虚拟教室</span>
                                         </div>
                                         <div class="naids">
-                                            <!--<i style="font-size: 60px;color: #D8D8D8;" class="icon iconfont icon-fuchan-"></i>-->
+                                            &lt;!&ndash;<i style="font-size: 60px;color: #D8D8D8;" class="icon iconfont icon-fuchan-"></i>&ndash;&gt;
                                             <img width="60" height="60" src="../images/fuchan-01.png" alt="">
                                         </div>
                                     </div>
@@ -322,14 +341,14 @@
                                 </div>
                                 </Col>
                                 <Col span="8">
-                                <div class="box_ant" shadow>
+                                    <div class="box_ant" shadow>
                                     <div class="title_name">
                                         <div class="tsts">
                                             <div class="line_col"></div>
                                             <span>超市</span>
                                         </div>
                                         <div class="naids">
-                                            <!--<i style="font-size: 60px;color: #D8D8D8;" class="icon iconfont icon-fanying-"></i>-->
+                                            &lt;!&ndash;<i style="font-size: 60px;color: #D8D8D8;" class="icon iconfont icon-fanying-"></i>&ndash;&gt;
                                             <img width="60" height="60" src="../images/fanying-01.png" alt="">
                                         </div>
                                     </div>
@@ -338,7 +357,7 @@
                                         <Button class="click_btn" @click="view_data_route('shop_two')" type="primary" shape="circle">标准模式</Button>
                                     </div>
                                 </div>
-                                </Col>
+                                </Col>-->
                             </Row>
                         </div>
                     </div>
@@ -453,6 +472,7 @@
 </template>
 
 <script>
+    import $ from 'jquery'
     import baisis_msg from './basis_msg.vue';
     import basis_msg_mobile from './basis_msg_mobile.vue';
     export default {
@@ -474,13 +494,128 @@
                         num:12,
                         time:'2015-10-10',
                         if_read:false
+                    },
+                },
+                /*接口返回的数据*/
+
+                product_list:[
+                    {
+                        "userId": "string",
+                        "project": {
+                            "name": "虚拟教室",
+                            "projectVersions": [],
+                            "projectModes": [
+                                {
+                                    "name": "CPT",
+                                    "displayName": "CPT"
+                                },
+                                {
+                                    "name": "WCST",
+                                    "displayName": "WCST"
+                                },
+                                {
+                                    "name": "Audio",
+                                    "displayName": "Audio"
+                                }
+                            ],
+                            "id": "vrclassroom"
+                        }
+                    },
+                    {
+                        "userId": "string",
+                        "project": {
+                            "name": "老年康复室",
+                            "projectVersions": [],
+                            "projectModes": [
+                                {
+                                    "name": "CPT",
+                                    "displayName": "CPT"
+                                },
+                                {
+                                    "name": "WCST",
+                                    "displayName": "WCST"
+                                },
+                                {
+                                    "name": "Audio",
+                                    "displayName": "Audio"
+                                },
+                                {
+                                    "name": "StroopTest",
+                                    "displayName": "StroopTest"
+                                },
+                                {
+                                    "name": "Visual",
+                                    "displayName": "Visual"
+                                },
+                                {
+                                    "name": "WordPairTest",
+                                    "displayName": "WordPairTest"
+                                }
+                            ],
+                            "id": "rehabilitation"
+                        }
+                    },
+                    {
+                        "userId": "string",
+                        "project": {
+                            "name": "超市",
+                            "projectVersions": [],
+                            "projectModes": [
+                                {
+                                    "name": "Standard",
+                                    "displayName": "标准模式"
+                                },
+                                {
+                                    "name": "Shelves",
+                                    "displayName": "货架模式"
+                                }
+                            ],
+                            "id": "supermarket"
+                        }
+                    },
+                    {
+                        "userId": "string",
+                        "project": {
+                            "name": "测试项目1",
+                            "projectVersions": [],
+                            "projectModes": [],
+                            "id": "testproject"
+                        }
+                    },
+                    {
+                        "userId": "string",
+                        "project": {
+                            "name": "测试项目2",
+                            "projectVersions": [],
+                            "projectModes": [],
+                            "id": "testlabdata"
+                        }
                     }
-                }
+                ]
             }
         },
         components:{
             baisis_msg,
             basis_msg_mobile
+        },
+        beforeCreate(){
+            const that=this;
+            $.ajax({
+                url:'/api/ProjectData/ListUserProjects',
+                type:'post',
+                data:{
+                    input:{
+                        "userId": "vrclassroom"
+                    }
+                },
+                dataType:'JSON',
+                success:function (data) {
+                    that.product_list=data;
+                },
+                error:function (data) {
+
+                }
+            })
         },
         methods:{
             exit(){
