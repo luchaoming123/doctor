@@ -436,6 +436,7 @@
                         <div style="margin: 0 0 0 10px">
                             <el-pagination
                                     background
+                                    @current-change="page_change"
                                     layout="prev, pager, next"
                                     :current-page="page_now"
                                     :total="page_count">
@@ -718,7 +719,7 @@
                 /*总共有多少页*/
                 page_count:1000,
                 /*现在的页数*/
-                page_now:2
+                page_now:1
             }
         },
 
@@ -859,6 +860,9 @@
 
             return_index(){
                 this.$router.push({ name: 'index', params: { userId: 123 }})
+            },
+            page_change(page_new){
+                console.log("第"+page_new+'页');
             }
         }
     }
