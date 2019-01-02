@@ -169,6 +169,34 @@
                 show_contents:'大风刮过或或或军军军军',
                 table_list:[],
                 data_return:{
+                    /*1.头动数据*/
+                    table_one:{
+                        "name": "眼动数据",
+                        "data": [
+                            {
+                                "timestamp": "2019-01-01T12:58:36.1019086+00:00",
+                                "x": 1.25,
+                                "y": 0,
+                                "z": 0,
+                                "w": 0
+                            },
+                            {
+                                "timestamp": "2019-01-01T12:58:36.1029086+00:00",
+                                "x": 1.24929655,
+                                "y": 0.001249297,
+                                "z": 0,
+                                "w": 0
+                            },
+                            {
+                                "timestamp": "2019-01-01T12:58:36.1039086+00:00",
+                                "x": 1.24719024,
+                                "y": 0.002494384,
+                                "z": 0,
+                                "w": 0
+                            },
+                        ]
+                    },
+                    /*2.眼动数据*/
                     table_two:{
                         "name": "眼动数据",
                         "data": [
@@ -195,7 +223,57 @@
                             },
                         ]
                     },
-                    /*历史数据*/
+                    /*3.超市轨迹*/
+                    table_three:{
+                        "name": "移动路径",
+                        "data": [
+                            {
+                                "timestamp": "2019-01-02T04:52:28.8420734+00:00",
+                                "x": 1.25,
+                                "y": 0,
+                                "z": 0,
+                                "w": 0
+                            },
+                            {
+                                "timestamp": "2019-01-02T04:52:28.8430734+00:00",
+                                "x": 1.24929655,
+                                "y": 0.001249297,
+                                "z": 0,
+                                "w": 0
+                            },
+                            {
+                                "timestamp": "2019-01-02T04:52:28.8440734+00:00",
+                                "x": 1.24719024,
+                                "y": 0.002494384,
+                                "z": 0,
+                                "w": 0
+                            },
+                        ]
+                    },
+                    /*4.单次排比*/
+                    table_9:{
+                        "name": "群体排比",
+                        "data": [
+                            {
+                                "name": "测试属性0",
+                                "percentile": 87
+                            },
+                            {
+                                "name": "测试属性1",
+                                "percentile": 32
+                            },
+                            {
+                                "name": "测试属性2",
+                                "percentile": 25
+                            }
+                        ]
+                    },
+                    /*5.任务表现*/
+                    table_four:{
+                        "name": "耗时",
+                        "data": "56.76566s"
+                    },
+                    /*6.历史数据*/
                     table_five:{
                         "name": "历史数据",
                         "data": [
@@ -231,29 +309,6 @@
                             }
                         ]
                     },
-                    /*单次排比*/
-                    table_three:{
-                        "name": "群体排比",
-                        "data": [
-                            {
-                                "name": "测试属性0",
-                                "percentile": 87
-                            },
-                            {
-                                "name": "测试属性1",
-                                "percentile": 32
-                            },
-                            {
-                                "name": "测试属性2",
-                                "percentile": 25
-                            }
-                        ]
-                    },
-                    /*任务表现*/
-                    table_four:{
-                        "name": "耗时",
-                        "data": "56.76566s"
-                    },
 
                 }
 
@@ -265,67 +320,144 @@
         },
         mounted(){
 
-
+            let that=this;
+            /*接收传的参数*/
+            let get_json=JSON.parse(this.$route.query.page_show);
             /**
              * 表一
              * */
-                // 基于准备好的dom，初始化echarts实例
-            var myChart_one = echarts.init(document.getElementById('main_one'));
-            var main_mobile_one = echarts.init(document.getElementById('main_mobile_one'));
-            // 绘制图表
-            myChart_one.setOption(this.echart_one());
-            main_mobile_one.setOption(this.echart_one());
+            /*1.头动数据*/
+            $.ajax({
+                url:'http://api.mindfrog.cn/api/Visualize/GetVisualizeData?ProjectId='+get_json.id+'&ScopeId=string&ChartId=HeadPosition',
+                type:'post',
+                data:{
+                    ProjectId:'vrclassroom',
+                    ScopeId:'string',
+                    ChartId:'HeadPosition'
+                },
+                dataType:'JSON',
+                success:function (data) {
+                    that.data_return.table_one=data;
+
+                    // 基于准备好的dom，初始化echarts实例
+                    var myChart_one = echarts.init(document.getElementById('main_one'));
+                    // 绘制图表
+                    myChart_one.setOption(that.echart_one());
+                },
+                error:function (data) {
+
+
+                }
+            });
+
             /**
              * 表二
              * */
-            // 基于准备好的dom，初始化echarts实例
-            var myChart_two = echarts.init(document.getElementById('main_two'));
-            var main_mobile_two = echarts.init(document.getElementById('main_mobile_two'));
+            /*2.眼动数据*/
+            const product_two=new Promise(function (resolve,reject) {
+                $.ajax({
+                    url:'http://api.mindfrog.cn/api/Visualize/GetVisualizeData?ProjectId='+get_json.id+'&ScopeId=string&ChartId=EyePosition',
+                    type:'post',
+                    data:{
+                        ProjectId:'vrclassroom',
+                        ScopeId:'string',
+                        ChartId:'EyePosition'
+                    },
+                    dataType:'JSON',
+                    success:function (data) {
+                        that.data_return.table_two=data;
 
-            // 绘制图表
-            myChart_two.setOption(this.echart_two());
-            main_mobile_two.setOption(this.echart_two());
+
+                        // 基于准备好的dom，初始化echarts实例
+                        var myChart_two = echarts.init(document.getElementById('main_two'));
+
+                        // 绘制图表
+                        myChart_two.setOption(that.echart_two());
+                    },
+                    error:function (data) {
+                        // 基于准备好的dom，初始化echarts实例
+                        var myChart_two = echarts.init(document.getElementById('main_two'));
+
+                        // 绘制图表
+                        myChart_two.setOption(that.echart_two());
+                    }
+                });
+            });
 
             /**
              * 表三
              * */
-            // 基于准备好的dom，初始化echarts实例
-            var myChart_three = echarts.init(document.getElementById('main_three'));
-            var main_mobile_three = echarts.init(document.getElementById('main_mobile_three'));
+            /*3.超市轨迹*/
+            $.ajax({
+                url:'http://api.mindfrog.cn/api/Visualize/GetVisualizeData?ProjectId='+get_json.id+'&ScopeId=string&ChartId=PersonMovement',
+                type:'post',
+                data:{
+                    ProjectId:'vrclassroom',
+                    ScopeId:'string',
+                    ChartId:'PersonMovement'
+                },
+                dataType:'JSON',
+                success:function (data) {
+                    that.data_return.table_three=data;
 
-            // 绘制图表
-            myChart_three.setOption(this.echart_three());
-            main_mobile_three.setOption(this.echart_three());
+                    // 基于准备好的dom，初始化echarts实例
+                    var myChart_three = echarts.init(document.getElementById('main_three'));
+
+                    // 绘制图表
+                    myChart_three.setOption(that.echart_three());
+                },
+                error:function (data) {
+                    // 基于准备好的dom，初始化echarts实例
+                    var myChart_three = echarts.init(document.getElementById('main_three'));
+
+                    // 绘制图表
+                    myChart_three.setOption(that.echart_three());
+
+                }
+            });
+
 
 
 
             /**
              * 表9
              * */
-                // 基于准备好的dom，初始化echarts实例
-            var myChart_9 = echarts.init(document.getElementById('main_9'));
+            /*4.任务表现*/
+            $.ajax({
+                url:'http://api.mindfrog.cn/api/Visualize/GetVisualizeData?ProjectId='+get_json.id+'&ScopeId=string&ChartId=CostTime',
+                type:'post',
+                data:{
+                    ProjectId:'vrclassroom',
+                    ScopeId:'string',
+                    ChartId:'CostTime'
+                },
+                dataType:'JSON',
+                success:function (data) {
+                    that.data_return.table_three=data;
 
-            // 绘制图表
-            myChart_9.setOption(this.echart_9());
+                    // 基于准备好的dom，初始化echarts实例
+                    var myChart_9 = echarts.init(document.getElementById('main_9'));
+
+                    // 绘制图表
+                    myChart_9.setOption(that.echart_9());
+                },
+                error:function (data) {
+                    // 基于准备好的dom，初始化echarts实例
+                    var myChart_9 = echarts.init(document.getElementById('main_9'));
+
+                    // 绘制图表
+                    myChart_9.setOption(that.echart_9());
+
+                }
+            });
+
 
             /**
              * 表10
              * */
-                // 基于准备好的dom，初始化echarts实例
-            var myChart_10 = echarts.init(document.getElementById('main_10'));
-
-            // 绘制图表
-            myChart_10.setOption(this.echart_10());
-
-        },
-
-        beforeCreate(){
-            //路由拿到的参数，请使用这个
-            console.log(this.$route.params);
-
-            const that=this;
+            /*5.历史数据*/
             $.ajax({
-                url:'http://api.mindfrog.cn/api/Visualize/GetVisualizeData?ProjectId=supermarket&ScopeId=string&ChartId=Percentile',
+                url:'http://api.mindfrog.cn/api/Visualize/GetVisualizeData?ProjectId='+get_json.id+'&ScopeId=string&ChartId=History',
                 type:'post',
                 data:{
                     ProjectId:'vrclassroom',
@@ -334,22 +466,37 @@
                 },
                 dataType:'JSON',
                 success:function (data) {
-                    that.table_list=data;
+                    that.data_return.table_five=data;
+
+
+                    // 基于准备好的dom，初始化echarts实例
+                    var myChart_10 = echarts.init(document.getElementById('main_10'));
+
+                    // 绘制图表
+                    myChart_10.setOption(that.echart_10());
                 },
                 error:function (data) {
 
+                    // 基于准备好的dom，初始化echarts实例
+                    var myChart_10 = echarts.init(document.getElementById('main_10'));
+
+                    // 绘制图表
+                    myChart_10.setOption(that.echart_10());
+
                 }
-            })
+            });
+
         },
         methods:{
             exit(){
 
             },
+            /*1.头动数据*/
             echart_one(){
                 let that=this;
                 var save_data_x=[];
                 var save_data_y=[];
-                $.each(that.data_return.table_two.data,function (index,element) {
+                $.each(that.data_return.table_one.data,function (index,element) {
                     save_data_x.push(element.x);
                     save_data_y.push(element.y);
                 });
@@ -400,6 +547,7 @@
                 return option;
             },
             echart_three(){
+
                 let that=this;
                 var save_data=[];
                 $.each(that.data_return.table_three.data,function (index,element) {
@@ -408,7 +556,7 @@
 
 
                 var symbolSize = 20;
-                var data = [[15, 0], [-50, 10], [-56.5, 20], [-46.5, 30], [-22.1, 40]];
+                var data = save_data;
 
                 var option = {
                     title:{
@@ -423,14 +571,14 @@
                     grid: {
                     },
                     xAxis: {
-                        min: -100,
-                        max: 80,
+                        min: 0,
+                        max: 2,
                         type: 'value',
                         axisLine: {onZero: false}
                     },
                     yAxis: {
-                        min: -30,
-                        max: 60,
+                        min: 0,
+                        max: 1,
                         type: 'value',
                         axisLine: {onZero: false}
                     },
@@ -471,6 +619,14 @@
             },
 
             echart_9(){
+                let that=this;
+                var save_data_x=[];
+                var save_data_y=[];
+                $.each(that.data_return.table_9.data,function (index,element) {
+                    save_data_x.push(element.percentile);
+                    save_data_y.push(element.name);
+                });
+
                 var option = {
                     title: {
                         text: '群体表现'
@@ -482,7 +638,7 @@
                         }
                     },
                     legend: {
-                        data: ['直接访问', '邮件营销','联盟广告','视频广告','搜索引擎']
+                        data: [that.data_return.table_9]
                     },
                     grid: {
                         left: '3%',
@@ -495,7 +651,7 @@
                     },
                     yAxis: {
                         type: 'category',
-                        data: ['周一','周二','周三','周四','周五','周六','周日']
+                        data: save_data_y
                     },
                     series: [
                         {
@@ -508,55 +664,7 @@
                                     position: 'insideRight'
                                 }
                             },
-                            data: [320, 302, 301, 334, 390, 330, 320]
-                        },
-                        {
-                            name: '邮件营销',
-                            type: 'bar',
-                            stack: '总量',
-                            label: {
-                                normal: {
-                                    show: true,
-                                    position: 'insideRight'
-                                }
-                            },
-                            data: [120, 132, 101, 134, 90, 230, 210]
-                        },
-                        {
-                            name: '联盟广告',
-                            type: 'bar',
-                            stack: '总量',
-                            label: {
-                                normal: {
-                                    show: true,
-                                    position: 'insideRight'
-                                }
-                            },
-                            data: [220, 182, 191, 234, 290, 330, 310]
-                        },
-                        {
-                            name: '视频广告',
-                            type: 'bar',
-                            stack: '总量',
-                            label: {
-                                normal: {
-                                    show: true,
-                                    position: 'insideRight'
-                                }
-                            },
-                            data: [150, 212, 201, 154, 190, 330, 410]
-                        },
-                        {
-                            name: '搜索引擎',
-                            type: 'bar',
-                            stack: '总量',
-                            label: {
-                                normal: {
-                                    show: true,
-                                    position: 'insideRight'
-                                }
-                            },
-                            data: [820, 832, 901, 934, 1290, 1330, 1320]
+                            data: save_data_x
                         }
                     ]
                 };

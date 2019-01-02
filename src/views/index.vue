@@ -83,7 +83,7 @@
 
                         }
                         .boxs_btns{
-                            margin-top: 30px;
+                            margin-top: 10px;
                             display: flex;
                             justify-content: flex-start;
                             flex-wrap: wrap;
@@ -281,7 +281,7 @@
                         </div>
                         <div class="title" style="background: #f8f8f9">
                             <Row class="box_centr">
-                                <Col span="8" v-for="(item,index) in product_list">
+                                <!--<Col span="8" v-for="(item,index) in product_list">
                                     <div class="box_ant" shadow>
                                     <div class="title_name">
                                         <div class="tsts">
@@ -296,8 +296,8 @@
                                         <Button v-for="(item_two,index_two) in item.project.projectModes" class="click_btn" @click="view_data_route(item)" type="primary" shape="circle">{{item_two.displayName}}</Button>
                                     </div>
                                 </div>
-                                </Col>
-                                <!--<Col span="8">
+                                </Col>-->
+                                <Col span="8">
                                     <div class="box_ant" shadow>
                                         <div class="title_name">
                                             <div class="tsts">
@@ -305,19 +305,19 @@
                                                 <span>康复室</span>
                                             </div>
                                             <div class="naids">
-                                                &lt;!&ndash;<i style="font-size: 60px;color: #D8D8D8;" class="icon iconfont icon-fuchan-"></i>&ndash;&gt;
+                                                <!--<i style="font-size: 60px;color: #D8D8D8;" class="icon iconfont icon-fuchan-"></i>-->
                                                 <img width="60" height="60" src="../images/fuchan-01.png" alt="">
                                             </div>
                                         </div>
                                         <div class="boxs_btns">
-                                            <Button class="click_btn" @click="view_data_route('room_first')" type="primary" shape="circle">CPT</Button>
-                                            <Button class="click_btn" @click="view_data_route('room_two')" type="primary" shape="circle">Stroop Test</Button>
-                                            <Button class="click_btn" @click="view_data_route('room_three')" type="primary" shape="circle">Audio</Button>
+                                            <Button class="click_btn" @click="view_data_route({name:'CPT',id:'rehabilitation'})" type="primary" shape="circle">CPT</Button>
+                                            <Button class="click_btn" @click="view_data_route({name:'Stroop Test',id:'rehabilitation'})" type="primary" shape="circle">Stroop Test</Button>
+                                            <Button class="click_btn" @click="view_data_route({name:'Audio',id:'rehabilitation'})" type="primary" shape="circle">Audio</Button>
                                         </div>
                                         <div class="boxs_btns">
-                                            <Button class="click_btn" @click="view_data_route('room_four')" type="primary" shape="circle">Visual</Button>
-                                            <Button class="click_btn" @click="view_data_route('room_five')" type="primary" shape="circle">WordPair</Button>
-                                            <Button class="click_btn" @click="view_data_route('room_six')" type="primary" shape="circle">WCST</Button>
+                                            <Button class="click_btn" @click="view_data_route({name:'Visual',id:'rehabilitation'})" type="primary" shape="circle">Visual</Button>
+                                            <Button class="click_btn" @click="view_data_route({name:'WordPair',id:'rehabilitation'})" type="primary" shape="circle">WordPair</Button>
+                                            <Button class="click_btn" @click="view_data_route({name:'WCST',id:'rehabilitation'})" type="primary" shape="circle">WCST</Button>
                                         </div>
                                     </div>
                                 </Col>
@@ -329,14 +329,14 @@
                                             <span>虚拟教室</span>
                                         </div>
                                         <div class="naids">
-                                            &lt;!&ndash;<i style="font-size: 60px;color: #D8D8D8;" class="icon iconfont icon-fuchan-"></i>&ndash;&gt;
+                                            <!--<i style="font-size: 60px;color: #D8D8D8;" class="icon iconfont icon-fuchan-"></i>-->
                                             <img width="60" height="60" src="../images/fuchan-01.png" alt="">
                                         </div>
                                     </div>
                                     <div class="boxs_btns">
-                                        <Button class="click_btn" @click="view_data_route('room_first')" type="primary" shape="circle">CPT</Button>
-                                        <Button class="click_btn" @click="view_data_route('room_two')" type="primary" shape="circle">Audio</Button>
-                                        <Button class="click_btn" @click="view_data_route('room_three')" type="primary" shape="circle">WCST</Button>
+                                        <Button class="click_btn" @click="view_data_route({name:'CPT',id:'vrclassroom'})" type="primary" shape="circle">CPT</Button>
+                                        <Button class="click_btn" @click="view_data_route({name:'Audio',id:'vrclassroom'})" type="primary" shape="circle">Audio</Button>
+                                        <Button class="click_btn" @click="view_data_route({name:'WCST',id:'vrclassroom'})" type="primary" shape="circle">WCST</Button>
                                     </div>
                                 </div>
                                 </Col>
@@ -348,16 +348,16 @@
                                             <span>超市</span>
                                         </div>
                                         <div class="naids">
-                                            &lt;!&ndash;<i style="font-size: 60px;color: #D8D8D8;" class="icon iconfont icon-fanying-"></i>&ndash;&gt;
+                                            <!--<i style="font-size: 60px;color: #D8D8D8;" class="icon iconfont icon-fanying-"></i>-->
                                             <img width="60" height="60" src="../images/fanying-01.png" alt="">
                                         </div>
                                     </div>
                                     <div class="boxs_btns" style="justify-content: flex-start">
-                                        <Button class="click_btn" @click="view_data_route('shop_one')" type="primary" style="margin-right: 20px" shape="circle">货架模式</Button>
-                                        <Button class="click_btn" @click="view_data_route('shop_two')" type="primary" shape="circle">标准模式</Button>
+                                        <Button class="click_btn" @click="view_data_route({name:'Standard',id:'supermarket'})" type="primary" style="margin-right: 10px" shape="circle">货架模式</Button>
+                                        <Button class="click_btn" @click="view_data_route({name:'Shelves',id:'supermarket'})" type="primary" shape="circle">标准模式</Button>
                                     </div>
                                 </div>
-                                </Col>-->
+                                </Col>
                             </Row>
                         </div>
                     </div>
@@ -601,12 +601,10 @@
         beforeCreate(){
             const that=this;
             $.ajax({
-                url:'/api/ProjectData/ListUserProjects',
+                url:'http://api.mindfrog.cn/api/ProjectData/ListUserProjects',
                 type:'post',
                 data:{
-                    input:{
-                        "userId": "vrclassroom"
-                    }
+                    "userId": "string"
                 },
                 dataType:'JSON',
                 success:function (data) {
@@ -622,7 +620,8 @@
 
             },
             view_data_route(e){
-                this.$router.push({ name: 'search', params: { page_show: e }})
+                e=JSON.stringify(e);
+                this.$router.push({ name: 'search', query: { page_show: e }})
             },
             return_index(){
                 this.$router.push({ name: 'index', params: { userId: 123 }})

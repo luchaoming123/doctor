@@ -369,6 +369,9 @@
     input:focus,button:active{
         outline:none!important;
     }
+    .active{
+        background-color: #E6655F!important;
+    }
 </style>
 <template>
     <div>
@@ -421,7 +424,8 @@
                                 <tbody>
                                 <tr v-for="(item,index) in table_return">
                                     <td style="width: 80px">{{index+1}}</td>
-                                    <td style="font-size: 12px">{{item.scopeEndTime}}</td>
+                                    <td style="font-size: 12px" v-if="item.scopeEndTime !== undefined">{{item.scopeEndTime}}</td>
+                                    <td style="font-size: 12px" v-else>-</td>
                                     <td style="cursor: pointer;width: 200px" @click="view_caht(item)">
                                         <div class="view_btn">查看</div>
                                     </td>
@@ -429,7 +433,14 @@
                                 </tbody>
                             </table>
                         </div>
-
+                        <div style="margin: 0 0 0 10px">
+                            <el-pagination
+                                    background
+                                    layout="prev, pager, next"
+                                    :current-page="page_now"
+                                    :total="page_count">
+                            </el-pagination>
+                        </div>
                         <div class="buton_choise">
 
                         </div>
@@ -702,47 +713,12 @@
                 ],
                 /*接口返回的数据*/
                 table_return:[
-                    {
-                        "number": 0,
-                        "_userId": "string",
-                        "_scopeId": "string",
-                        "scopeStartTime": "2018-12-31T13:31:28.684Z",
-                        "scopeEndTime": "2018-12-31T13:31:28.684Z",
-                        "_projectId": "string",
-                        "visualize": [
-                            {
-                                "projectId": "string",
-                                "name": "string",
-                                "dataCategory": "string",
-                                "chartId": "string",
-                                "chartType": "SimpleString",
-                                "dataType": "SimpleString",
-                                "url": "string",
-                                "categoryDisplayName": "string"
-                            }
-                        ]
-                    },
-                    {
-                        "number": 0,
-                        "_userId": "string",
-                        "_scopeId": "string",
-                        "scopeStartTime": "2018-12-31T13:31:28.684Z",
-                        "scopeEndTime": "2018-12-31T13:31:28.684Z",
-                        "_projectId": "string",
-                        "visualize": [
-                            {
-                                "projectId": "string",
-                                "name": "string",
-                                "dataCategory": "string",
-                                "chartId": "string",
-                                "chartType": "SimpleString",
-                                "dataType": "SimpleString",
-                                "url": "string",
-                                "categoryDisplayName": "string"
-                            }
-                        ]
-                    }
-                ]
+
+                ],
+                /*总共有多少页*/
+                page_count:1000,
+                /*现在的页数*/
+                page_now:2
             }
         },
 
@@ -753,17 +729,12 @@
         beforeCreate(){
 
             //路由拿到的参数，请使用这个
-            console.log(this.$route.params);
-
+            console.log(JSON.parse(this.$route.query.page_show));
+            var get_json=JSON.parse(this.$route.query.page_show);
             const that=this;
             $.ajax({
-                url:'/api/ProjectData/ListUserProjects',
-                type:'post',
-                data:{
-                    input:{
-                        "userId": "vrclassroom"
-                    }
-                },
+                url:"http://api.mindfrog.cn/api/ProjectData/ListUserProjectScopes?UserId=test01&ProjectId="+get_json.id+"&ScopeId=string&DataType=json&MaxResultCount=10&SkipCount=10",
+                type:'get',
                 dataType:'JSON',
                 success:function (data) {
                     that.table_return=data;
@@ -822,7 +793,14 @@
             },
             view_caht(e){
                 /*e为要传递的参数*/
-                this.$router.push({ name: 'echart', params: { userId: e }})
+                let get_json=JSON.parse(this.$route.query.page_show);
+                let datas={
+                    data: e,
+                    product:get_json
+                };
+                console.log(datas);
+                datas=JSON.stringify(datas);
+                this.$router.push({ name: 'echart', query: this.$route.query})
             },
             pai_ming(){
                 this.$router.push({ name: 'sort', params: { userId: 123 }})
@@ -875,7 +853,8 @@
             },
             /*移动端alert路由*/
             route_mobile_to_alert(index){
-                this.$router.push({ name: 'search_mobile', params: { data: index }})
+
+                this.$router.push({ name: 'index', params: { userId: 123 }})
             },
 
             return_index(){
