@@ -80,7 +80,7 @@
                             &nbsp;&nbsp;&nbsp;&nbsp;
                             <i style="font-size: 8px;color: #D8D8D8;" class="icon iconfont icon-arrow-"></i>
 
-                            <span style="cursor: pointer" @click="return_ya()">压力反应测试</span>
+                            <span style="cursor: pointer" @click="return_ya()">{{where_from}}</span>
                             &nbsp;&nbsp;&nbsp;&nbsp;
                             <i style="font-size: 8px;color: #D8D8D8;" class="icon iconfont icon-arrow-"></i>
 
@@ -310,7 +310,8 @@
                         ]
                     },
 
-                }
+                },
+                where_from:''
 
             }
         },
@@ -323,6 +324,18 @@
             let that=this;
             /*接收传的参数*/
             let get_json=JSON.parse(this.$route.query.page_show);
+
+            switch (get_json.id){
+                case 'rehabilitation':
+                    that.where_from='康复室';
+                    break;
+                case 'vrclassroom':
+                    that.where_from='虚拟教室';
+                    break;
+                case 'supermarket':
+                    that.where_from='超市';
+                    break;
+            }
             /**
              * 表一
              * */
@@ -331,7 +344,7 @@
                 url:'http://api.mindfrog.cn/api/Visualize/GetVisualizeData?ProjectId='+get_json.id+'&ScopeId=string&ChartId=HeadPosition',
                 type:'post',
                 data:{
-                    ProjectId:'vrclassroom',
+                    ProjectId:get_json.id,
                     ScopeId:'string',
                     ChartId:'HeadPosition'
                 },
@@ -359,7 +372,7 @@
                     url:'http://api.mindfrog.cn/api/Visualize/GetVisualizeData?ProjectId='+get_json.id+'&ScopeId=string&ChartId=EyePosition',
                     type:'post',
                     data:{
-                        ProjectId:'vrclassroom',
+                        ProjectId:get_json.id,
                         ScopeId:'string',
                         ChartId:'EyePosition'
                     },
@@ -392,7 +405,7 @@
                 url:'http://api.mindfrog.cn/api/Visualize/GetVisualizeData?ProjectId='+get_json.id+'&ScopeId=string&ChartId=PersonMovement',
                 type:'post',
                 data:{
-                    ProjectId:'vrclassroom',
+                    ProjectId:get_json.id,
                     ScopeId:'string',
                     ChartId:'PersonMovement'
                 },
@@ -427,7 +440,7 @@
                 url:'http://api.mindfrog.cn/api/Visualize/GetVisualizeData?ProjectId='+get_json.id+'&ScopeId=string&ChartId=CostTime',
                 type:'post',
                 data:{
-                    ProjectId:'vrclassroom',
+                    ProjectId:get_json.id,
                     ScopeId:'string',
                     ChartId:'CostTime'
                 },
@@ -460,7 +473,7 @@
                 url:'http://api.mindfrog.cn/api/Visualize/GetVisualizeData?ProjectId='+get_json.id+'&ScopeId=string&ChartId=History',
                 type:'post',
                 data:{
-                    ProjectId:'vrclassroom',
+                    ProjectId:get_json.id,
                     ScopeId:'string',
                     ChartId:'History'
                 },
@@ -496,10 +509,16 @@
                 let that=this;
                 var save_data_x=[];
                 var save_data_y=[];
+                var save_data_z=[];
+                var x=[];
                 $.each(that.data_return.table_one.data,function (index,element) {
                     save_data_x.push(element.x);
                     save_data_y.push(element.y);
+                    save_data_z.push(element.z);
+                    x.push(index);
                 });
+
+
 
                 var option = {
                     title: {
@@ -507,16 +526,26 @@
                     },
                     xAxis: {
                         type: 'category',
-                        data: save_data_x
+                        data: x
                     },
                     yAxis: {
                         type: 'value'
                     },
                     series: [
                         {
+                            data: save_data_x,
+                            type: 'line',
+                            smooth: true,
+                        },
+                        {
                             data: save_data_y,
                             type: 'line',
-                            smooth: true
+                            smooth: true,
+                        },
+                        {
+                            data: save_data_z,
+                            type: 'line',
+                            smooth: true,
                         }
                     ]
                 };

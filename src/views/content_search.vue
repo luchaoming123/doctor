@@ -388,7 +388,7 @@
                             &nbsp;&nbsp;&nbsp;&nbsp;
                             <i style="font-size: 8px;color: #D8D8D8;" class="icon iconfont icon-arrow-"></i>
 
-                            <span>压力反应测试</span>
+                            <span>{{where_from}}</span>
                         </div>
                         <div class="postitao_ctr">
                             <i style="font-size: 8px;color: #D8D8D8;" class="icon iconfont icon-remind-"></i>
@@ -424,7 +424,7 @@
                                 <tbody>
                                 <tr v-for="(item,index) in table_return">
                                     <td style="width: 80px">{{index+1}}</td>
-                                    <td style="font-size: 12px" v-if="item.scopeEndTime !== undefined">{{item.scopeEndTime}}</td>
+                                    <td style="font-size: 12px" v-if="item.scopeStartTime !== undefined">{{item.scopeEndTime}}</td>
                                     <td style="font-size: 12px" v-else>-</td>
                                     <td style="cursor: pointer;width: 200px" @click="view_caht(item)">
                                         <div class="view_btn">查看</div>
@@ -719,7 +719,9 @@
                 /*总共有多少页*/
                 page_count:1000,
                 /*现在的页数*/
-                page_now:1
+                page_now:1,
+                /*where_from*/
+                where_from:'',
             }
         },
 
@@ -729,10 +731,10 @@
         },
         beforeCreate(){
 
+            const that=this;
             //路由拿到的参数，请使用这个
             console.log(JSON.parse(this.$route.query.page_show));
             var get_json=JSON.parse(this.$route.query.page_show);
-            const that=this;
             $.ajax({
                 url:"http://api.mindfrog.cn/api/ProjectData/ListUserProjectScopes?UserId=test01&ProjectId="+get_json.id+"&ScopeId=string&DataType=json&MaxResultCount=10&SkipCount=10",
                 type:'get',
@@ -748,6 +750,20 @@
         },
         mounted(){
             const that=this;
+
+            var get_json=JSON.parse(this.$route.query.page_show);
+            switch (get_json.id){
+                case 'rehabilitation':
+                    that.where_from='康复室';
+                    break;
+                case 'vrclassroom':
+                    that.where_from='虚拟教室';
+                    break;
+                case 'supermarket':
+                    that.where_from='超市';
+                    break;
+            }
+
             $(".ivu-modal-header-inner").css({
                 'font-family': 'PingFangSC-Medium',
                 'font-size': '18px',
